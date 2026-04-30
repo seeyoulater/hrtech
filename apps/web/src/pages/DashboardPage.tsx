@@ -5,17 +5,23 @@ import { Grid } from '@/shared/components/Grid';
 import { ApplicationCard } from '@/shared/components/ApplicationCard';
 import { EmptyState } from '@/shared/components/EmptyState';
 import { GoalBanner } from '@/shared/components/GoalBanner';
+import { useConfirm } from '@/shared/components/Confirm';
 import { useApplications } from '@/shared/hooks/useApplications';
 import styles from './DashboardPage.module.css';
 
 export function DashboardPage() {
   const { applications, remove } = useApplications();
+  const confirm = useConfirm();
   const isEmpty = applications.length === 0;
 
-  const handleDelete = (id: string) => {
-    if (window.confirm('Delete this cover letter? This cannot be undone.')) {
-      remove(id);
-    }
+  const handleDelete = async (id: string) => {
+    const ok = await confirm({
+      title: 'Delete this cover letter?',
+      description: 'This cannot be undone.',
+      confirmLabel: 'Delete',
+      destructive: true,
+    });
+    if (ok) remove(id);
   };
 
   return (

@@ -1,0 +1,90 @@
+.dialog {
+  /* Reset native dialog defaults */
+  border: none;
+  padding: 0;
+  margin: auto;
+  background: var(--color-bg);
+  color: var(--color-text);
+  border-radius: var(--radius-lg);
+  max-width: 420px;
+  width: calc(100% - var(--space-7));
+  box-shadow:
+    0 24px 64px -16px oklch(15% 0.01 95 / 0.25),
+    0 4px 12px oklch(15% 0.01 95 / 0.08);
+
+  /* Pre-open and post-close state. Keep these in sync with the
+     @starting-style block — that's what gives us the open transition. */
+  opacity: 0;
+  transform: scale(0.96) translateY(-4px);
+  transition:
+    opacity 200ms var(--ease-out-quart),
+    transform 200ms var(--ease-out-quart),
+    overlay 200ms allow-discrete,
+    display 200ms allow-discrete;
+}
+
+.dialog[open] {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+@starting-style {
+  .dialog[open] {
+    opacity: 0;
+    transform: scale(0.96) translateY(-4px);
+  }
+}
+
+/* Backdrop: solid dim only, no glassmorphism blur. */
+.dialog::backdrop {
+  background: oklch(15% 0.01 95 / 0);
+  transition:
+    background 200ms var(--ease-out-quart),
+    display 200ms allow-discrete,
+    overlay 200ms allow-discrete;
+}
+
+.dialog[open]::backdrop {
+  background: oklch(15% 0.01 95 / 0.5);
+}
+
+@starting-style {
+  .dialog[open]::backdrop {
+    background: oklch(15% 0.01 95 / 0);
+  }
+}
+
+.body {
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.title {
+  font-size: var(--text-xl);
+  margin: 0;
+}
+
+.description {
+  font-size: var(--text-base);
+  color: var(--color-text-muted);
+  margin: 0;
+  line-height: var(--leading-normal);
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+}
+
+@media (--reduce-motion) {
+  .dialog,
+  .dialog[open],
+  .dialog::backdrop,
+  .dialog[open]::backdrop {
+    transition: none;
+  }
+}

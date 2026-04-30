@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes, useParams } from 'react-router-dom';
 import { Header } from '@/shared/components/Header';
 import { GoalCelebration } from '@/shared/components/GoalCelebration';
 import { EmojiExplosionProvider } from '@/shared/components/EmojiExplosion';
+import { ConfirmProvider } from '@/shared/components/Confirm';
 import { DashboardPage } from '@/pages/DashboardPage';
 import { GeneratorPage } from '@/pages/GeneratorPage';
 import { useApplications } from '@/shared/hooks/useApplications';
@@ -40,10 +41,12 @@ function AppShell() {
 export default function App() {
   return (
     <BrowserRouter>
-      <EmojiExplosionProvider>
-        <AppShell />
-        <GoalCelebration />
-      </EmojiExplosionProvider>
+      <ConfirmProvider>
+        <EmojiExplosionProvider>
+          <AppShell />
+          <GoalCelebration />
+        </EmojiExplosionProvider>
+      </ConfirmProvider>
     </BrowserRouter>
   );
 }

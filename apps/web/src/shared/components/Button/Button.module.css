@@ -91,6 +91,23 @@
   color: var(--color-text-subtle);
 }
 
+.variant_destructive {
+  background: var(--color-danger);
+  color: var(--color-text-on-accent);
+  border: 1px solid var(--color-danger);
+}
+
+.variant_destructive:not(:disabled):hover {
+  background: var(--color-danger-hover);
+  border-color: var(--color-danger-hover);
+}
+
+.variant_destructive:disabled:not([data-loading='true']) {
+  background: var(--color-progress-empty);
+  color: var(--color-text-subtle);
+  border-color: var(--color-progress-empty);
+}
+
 .fullWidth {
   width: 100%;
 }
