@@ -1,3 +1,10 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  min-height: 100%;
+}
+
 .card {
   display: flex;
   flex-direction: column;
@@ -58,6 +65,52 @@
   border-radius: var(--radius-xs);
 }
 
+/* Retro loader: a soft ball with a halo, bouncing slowly. */
+.retroLoader {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 360px;
+}
+
+.ball {
+  --ball-size: 88px;
+  width: var(--ball-size);
+  height: var(--ball-size);
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 50% 25%,
+    oklch(0.99 0.003 95) 0%,
+    oklch(0.96 0.003 95) 35%,
+    oklch(0.85 0.005 95) 100%
+  );
+  /* soft outer halo so the ball reads like a 3D sphere on a flat surface */
+  /* box-shadow:
+    0 0 0 1px oklch(0.85 0.005 95 / 0.35),
+    0 24px 60px -10px oklch(0.7 0.005 95 / 0.45),
+    0 0 80px 30px oklch(0.95 0.003 95 / 0.55); */
+  animation: ballBounce 2s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
+@keyframes ballBounce {
+  0%,
+  100% {
+    transform: translateY(12px) scale(0.96);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-12px) scale(1);
+    opacity: 0.5;
+  }
+}
+
+@media (--reduce-motion) {
+  .ball {
+    animation: none;
+  }
+}
+
 .footer {
   display: flex;
   justify-content: flex-end;
@@ -68,4 +121,88 @@
   margin: 0;
   font-size: var(--text-sm);
   color: var(--color-danger);
+}
+
+/* The toggle below the card is a meta-control, kept low-volume. */
+.retroToggleRow {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--space-2);
+}
+
+.tooltipWrap {
+  position: relative;
+  display: inline-block;
+}
+
+.retroToggle {
+  background: none;
+  border: 0;
+  padding: var(--space-2) var(--space-3);
+  font-family: inherit;
+  font-size: var(--text-sm);
+  color: var(--color-text-subtle);
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-underline-offset: 3px;
+  transition:
+    color var(--transition-fast),
+    background var(--transition-fast);
+}
+
+.retroToggle:hover,
+.retroToggle:focus-visible {
+  color: var(--color-text);
+}
+
+.retroToggle:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+/* Tooltip: dark popover above the trigger, shown on hover/focus. */
+.tooltip {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  width: max-content;
+  max-width: 280px;
+  padding: var(--space-2) var(--space-3);
+  background: oklch(0.22 0.005 95);
+  color: oklch(0.97 0.003 95);
+  font-size: var(--text-xs);
+  line-height: 1.45;
+  text-align: center;
+  border-radius: var(--radius-sm);
+  pointer-events: none;
+  opacity: 0;
+  transition:
+    opacity 150ms var(--ease-out-quart),
+    transform 150ms var(--ease-out-quart);
+  z-index: 10;
+}
+
+.tooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: oklch(0.22 0.005 95);
+}
+
+.tooltipWrap:hover .tooltip,
+.tooltipWrap:focus-within .tooltip {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+@media (--reduce-motion) {
+  .tooltip {
+    transition: none;
+  }
 }
