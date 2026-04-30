@@ -10,7 +10,7 @@ type HeaderProps = {
   count: number;
 };
 
-export function Header({ count }: HeaderProps) {
+export const Header = ({ count }: HeaderProps) => {
   const filled = Math.min(count, GOAL);
   const achieved = count >= GOAL;
   return (
@@ -45,4 +45,4 @@ export function Header({ count }: HeaderProps) {
       </div>
     </header>
   );
-}
+};

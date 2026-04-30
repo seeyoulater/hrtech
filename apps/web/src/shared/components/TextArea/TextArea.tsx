@@ -16,20 +16,10 @@ type TextAreaProps = TextareaHTMLAttributes<HTMLTextAreaElement> & {
 };
 
 export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
-  function TextArea(
-    {
-      label,
-      id,
-      className,
-      showCounter,
-      count,
-      countMax,
-      value,
-      error,
-      ...rest
-    },
+  (
+    { label, id, className, showCounter, count, countMax, value, error, ...rest },
     ref,
-  ) {
+  ) => {
     const generatedId = useId();
     const inputId = id ?? generatedId;
     const length = count ?? (typeof value === 'string' ? value.length : 0);
@@ -61,3 +51,5 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
     );
   },
 );
+
+TextArea.displayName = 'TextArea';

@@ -6,11 +6,6 @@ type CardProps = HTMLAttributes<HTMLDivElement> & {
   tone?: 'subtle' | 'plain';
 };
 
-export function Card({ tone = 'subtle', className, ...rest }: CardProps) {
-  return (
-    <div
-      className={cn(styles.card, styles[`tone_${tone}`], className)}
-      {...rest}
-    />
-  );
-}
+export const Card = ({ tone = 'subtle', className, ...rest }: CardProps) => (
+  <div className={cn(styles.card, styles[`tone_${tone}`], className)} {...rest} />
+);

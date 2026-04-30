@@ -31,7 +31,7 @@ const COLLAPSE_CLASS: Record<Exclude<CollapseAt, false>, string> = {
   laptopDown: styles.collapseLaptopDown,
 };
 
-export function Grid({
+export const Grid = ({
   as = 'div',
   columns = 2,
   collapse = 'tabletDown',
@@ -39,7 +39,7 @@ export function Grid({
   className,
   style,
   children,
-}: GridProps) {
+}: GridProps) => {
   const classes = cn(
     styles.grid,
     collapse && COLLAPSE_CLASS[collapse],
@@ -53,4 +53,4 @@ export function Grid({
   };
 
   return createElement(as, { className: classes, style: styleVars }, children);
-}
+};

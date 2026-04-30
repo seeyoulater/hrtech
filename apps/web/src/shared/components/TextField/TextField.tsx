@@ -9,7 +9,7 @@ type TextFieldProps = InputHTMLAttributes<HTMLInputElement> & {
 };
 
 export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
-  function TextField({ label, id, className, error, ...rest }, ref) {
+  ({ label, id, className, error, ...rest }, ref) => {
     const generatedId = useId();
     const inputId = id ?? generatedId;
     return (
@@ -28,3 +28,5 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
     );
   },
 );
+
+TextField.displayName = 'TextField';

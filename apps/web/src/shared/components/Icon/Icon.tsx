@@ -25,11 +25,8 @@ type Props = Omit<IconProps, 'icon'> & {
   className?: string;
 };
 
-export const Icon = forwardRef<SVGSVGElement, Props>(function Icon(
-  { name, size = 16, color, className, ...rest },
-  ref,
-) {
-  return (
+export const Icon = forwardRef<SVGSVGElement, Props>(
+  ({ name, size = 16, color, className, ...rest }, ref) => (
     <IconifyIcon
       ref={ref}
       icon={name}
@@ -39,5 +36,7 @@ export const Icon = forwardRef<SVGSVGElement, Props>(function Icon(
       className={cn(styles.icon, className)}
       {...rest}
     />
-  );
-});
+  ),
+);
+
+Icon.displayName = 'Icon';

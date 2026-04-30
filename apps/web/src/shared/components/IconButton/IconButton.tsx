@@ -10,21 +10,21 @@ type IconButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 };
 
 export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
-  function IconButton(
+  (
     { label, children, variant = 'outline', className, type = 'button', ...rest },
     ref,
-  ) {
-    return (
-      <button
-        ref={ref}
-        type={type}
-        aria-label={label}
-        title={label}
-        className={cn(styles.btn, styles[`variant_${variant}`], className)}
-        {...rest}
-      >
-        {children}
-      </button>
-    );
-  },
+  ) => (
+    <button
+      ref={ref}
+      type={type}
+      aria-label={label}
+      title={label}
+      className={cn(styles.btn, styles[`variant_${variant}`], className)}
+      {...rest}
+    >
+      {children}
+    </button>
+  ),
 );
+
+IconButton.displayName = 'IconButton';

@@ -27,7 +27,7 @@ type ConfirmFn = (options: ConfirmOptions) => Promise<boolean>;
 
 const ConfirmContext = createContext<ConfirmFn | null>(null);
 
-export function ConfirmProvider({ children }: { children: ReactNode }) {
+export const ConfirmProvider = ({ children }: { children: ReactNode }) => {
   const [pending, setPending] = useState<Pending | null>(null);
   const dialogRef = useRef<HTMLDialogElement>(null);
 
@@ -81,9 +81,14 @@ export function ConfirmProvider({ children }: { children: ReactNode }) {
       </dialog>
     </ConfirmContext.Provider>
   );
-}
+};
 
-function ConfirmBody({
+type ConfirmBodyProps = ConfirmOptions & {
+  onCancel: () => void;
+  onConfirm: () => void;
+};
+
+const ConfirmBody = ({
   title,
   description,
   confirmLabel = 'Confirm',
@@ -91,7 +96,7 @@ function ConfirmBody({
   destructive,
   onCancel,
   onConfirm,
-}: ConfirmOptions & { onCancel: () => void; onConfirm: () => void }) {
+}: ConfirmBodyProps) => {
   const confirmBtnRef = useRef<HTMLButtonElement>(null);
   const cancelBtnRef = useRef<HTMLButtonElement>(null);
 
@@ -126,7 +131,7 @@ function ConfirmBody({
       </div>
     </div>
   );
-}
+};
 
 /**
  * Returns a function that opens a confirm dialog and resolves with
@@ -140,7 +145,7 @@ function ConfirmBody({
  * const ok = await confirm({ title: 'Delete this letter?' });
  * ```
  */
-export function useConfirm(defaults?: Partial<ConfirmOptions>): ConfirmFn {
+export const useConfirm = (defaults?: Partial<ConfirmOptions>): ConfirmFn => {
   const ctx = useContext(ConfirmContext);
   if (!ctx) {
     throw new Error('useConfirm must be used inside <ConfirmProvider>');
@@ -159,4 +164,4 @@ export function useConfirm(defaults?: Partial<ConfirmOptions>): ConfirmFn {
     defaults?.cancelLabel,
     defaults?.destructive,
   ]);
-}
+};

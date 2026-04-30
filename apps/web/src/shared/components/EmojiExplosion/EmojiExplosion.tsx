@@ -1,26 +1,26 @@
-import { createContext, useCallback, useContext, useState } from "react";
-import type { CSSProperties, ReactNode } from "react";
-import { nanoid } from "nanoid";
-import styles from "./EmojiExplosion.module.css";
+import { createContext, useCallback, useContext, useState } from 'react';
+import type { CSSProperties, ReactNode } from 'react';
+import { nanoid } from 'nanoid';
+import styles from './EmojiExplosion.module.css';
 
-const DEFAULT_EMOJIS = ["🎉", "🥳", "👊", "🥹", "🤘", "🤩", "🥰"];
+const DEFAULT_EMOJIS = ['🎉', '🥳', '👊', '🥹', '🤘', '🤩', '🥰'];
 
 const DEFAULT_MESSAGES = [
-  "Nice one!",
-  "Five down.",
-  "You did it!",
-  "Goal smashed!",
-  "Crushing it!",
-  "Sent it!",
-  "Take a bow.",
-  "Locked in!",
-  "Big energy.",
-  "You earned this.",
-  "Bruh, you rock!",
-  "YAAAAAY!",
-  "WOHOOOO!!!",
-  "Keep it up!",
-  "Chill buddy! AI will replace you anyway....",
+  'Nice one!',
+  'Five down.',
+  'You did it!',
+  'Goal smashed!',
+  'Crushing it!',
+  'Sent it!',
+  'Take a bow.',
+  'Locked in!',
+  'Big energy.',
+  'You earned this.',
+  'Bruh, you rock!',
+  'YAAAAAY!',
+  'WOHOOOO!!!',
+  'Keep it up!',
+  'Chill buddy! AI will replace you anyway....',
 ];
 
 const MESSAGE_DURATION_MS = 2400;
@@ -62,7 +62,11 @@ const EmojiContext = createContext<Explode | null>(null);
 
 const pick = <T,>(arr: T[]): T => arr[Math.floor(Math.random() * arr.length)];
 
-export function EmojiExplosionProvider({ children }: { children: ReactNode }) {
+export const EmojiExplosionProvider = ({
+  children,
+}: {
+  children: ReactNode;
+}) => {
   const [items, setItems] = useState<EmojiItem[]>([]);
   const [message, setMessage] = useState<BurstMessage | null>(null);
 
@@ -94,7 +98,7 @@ export function EmojiExplosionProvider({ children }: { children: ReactNode }) {
     let text: string | null;
     if (opts?.message === null) {
       text = null;
-    } else if (typeof opts?.message === "string") {
+    } else if (typeof opts?.message === 'string') {
       text = opts.message;
     } else {
       text = pick(opts?.messages ?? DEFAULT_MESSAGES);
@@ -119,12 +123,12 @@ export function EmojiExplosionProvider({ children }: { children: ReactNode }) {
             className={styles.emojiY}
             style={
               {
-                "--left": `${item.left}%`,
-                "--delay": `${item.delay}ms`,
-                "--duration": `${item.duration}ms`,
-                "--drift": `${item.drift}px`,
-                "--size": `${item.size}rem`,
-                "--rotation": `${item.rotation}deg`,
+                '--left': `${item.left}%`,
+                '--delay': `${item.delay}ms`,
+                '--duration': `${item.duration}ms`,
+                '--drift': `${item.drift}px`,
+                '--size': `${item.size}rem`,
+                '--rotation': `${item.rotation}deg`,
               } as CSSProperties
             }
           >
@@ -141,14 +145,14 @@ export function EmojiExplosionProvider({ children }: { children: ReactNode }) {
       </div>
     </EmojiContext.Provider>
   );
-}
+};
 
-export function useEmojiExplosion(): Explode {
+export const useEmojiExplosion = (): Explode => {
   const ctx = useContext(EmojiContext);
   if (!ctx) {
     throw new Error(
-      "useEmojiExplosion must be used inside <EmojiExplosionProvider>",
+      'useEmojiExplosion must be used inside <EmojiExplosionProvider>',
     );
   }
   return ctx;
-}
+};

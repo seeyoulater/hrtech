@@ -9,7 +9,7 @@ type GoalBannerProps = {
   count: number;
 };
 
-export function GoalBanner({ count }: GoalBannerProps) {
+export const GoalBanner = ({ count }: GoalBannerProps) => {
   if (count >= GOAL) return null;
   const filled = Math.min(count, GOAL);
   return (
@@ -30,4 +30,4 @@ export function GoalBanner({ count }: GoalBannerProps) {
       </p>
     </section>
   );
-}
+};

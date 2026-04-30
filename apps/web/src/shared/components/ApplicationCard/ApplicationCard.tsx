@@ -11,7 +11,10 @@ type ApplicationCardProps = {
   onDelete: (id: string) => void;
 };
 
-export function ApplicationCard({ application, onDelete }: ApplicationCardProps) {
+export const ApplicationCard = ({
+  application,
+  onDelete,
+}: ApplicationCardProps) => {
   const { copied, copy } = useCopy();
   return (
     <Card className={styles.card}>
@@ -48,4 +51,4 @@ export function ApplicationCard({ application, onDelete }: ApplicationCardProps)
       </div>
     </Card>
   );
-}
+};

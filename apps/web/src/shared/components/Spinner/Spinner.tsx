@@ -8,17 +8,14 @@ type SpinnerProps = {
 
 /**
  * Animated loading indicator from the `svg-spinners` Iconify
- * collection. Lazy-fetched on first use, cached afterwards. No inline
- * SVG, no custom rotation animation needed.
+ * collection. Lazy-fetched on first use, cached afterwards.
  */
-export function Spinner({ size = 20, label = 'Loading' }: SpinnerProps) {
-  return (
-    <span className={styles.wrap} role="status" aria-label={label}>
-      <IconifyIcon
-        icon="svg-spinners:bars-rotate-fade"
-        width={size}
-        height={size}
-      />
-    </span>
-  );
-}
+export const Spinner = ({ size = 20, label = 'Loading' }: SpinnerProps) => (
+  <span className={styles.wrap} role="status" aria-label={label}>
+    <IconifyIcon
+      icon="svg-spinners:bars-rotate-fade"
+      width={size}
+      height={size}
+    />
+  </span>
+);

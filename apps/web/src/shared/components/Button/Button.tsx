@@ -16,38 +16,36 @@ type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   loading?: boolean;
 };
 
-export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
-  {
-    variant = 'primary',
-    size = 'md',
-    iconLeft,
-    iconRight,
-    fullWidth,
-    loading,
-    disabled,
-    children,
-    className,
-    type = 'button',
-    ...rest
-  },
-  ref,
-) {
-  const cls = cn(
-    styles.btn,
-    styles[`variant_${variant}`],
-    styles[`size_${size}`],
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  (
     {
-      [styles.fullWidth]: fullWidth,
-      [styles.loading]: loading,
+      variant = 'primary',
+      size = 'md',
+      iconLeft,
+      iconRight,
+      fullWidth,
+      loading,
+      disabled,
+      children,
+      className,
+      type = 'button',
+      ...rest
     },
-    className,
-  );
-
-  return (
+    ref,
+  ) => (
     <button
       ref={ref}
       type={type}
-      className={cls}
+      className={cn(
+        styles.btn,
+        styles[`variant_${variant}`],
+        styles[`size_${size}`],
+        {
+          [styles.fullWidth]: fullWidth,
+          [styles.loading]: loading,
+        },
+        className,
+      )}
       disabled={disabled || loading}
       data-loading={loading ? 'true' : undefined}
       {...rest}
@@ -62,5 +60,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
         </>
       )}
     </button>
-  );
-});
+  ),
+);
+
+Button.displayName = 'Button';

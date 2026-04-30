@@ -11,7 +11,11 @@ type LetterPreviewProps = {
   error: string | null;
 };
 
-export function LetterPreview({ letter, loading, error }: LetterPreviewProps) {
+export const LetterPreview = ({
+  letter,
+  loading,
+  error,
+}: LetterPreviewProps) => {
   const { copied, copy } = useCopy();
   const aiStatus = useAiConfigured();
   const hasContent = letter.length > 0;
@@ -58,4 +62,4 @@ export function LetterPreview({ letter, loading, error }: LetterPreviewProps) {
       </div>
     </Card>
   );
-}
+};

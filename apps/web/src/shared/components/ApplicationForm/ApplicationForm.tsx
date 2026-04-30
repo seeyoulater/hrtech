@@ -24,12 +24,12 @@ const headlineFor = (jobTitle: string, company: string): string => {
   return role || co;
 };
 
-export function ApplicationForm({
+export const ApplicationForm = ({
   defaultValues = EMPTY_FORM,
   onSubmit,
   loading,
   hasGenerated,
-}: ApplicationFormProps) {
+}: ApplicationFormProps) => {
   const {
     register,
     handleSubmit,
@@ -100,4 +100,4 @@ export function ApplicationForm({
       </form>
     </div>
   );
-}
+};

@@ -10,7 +10,7 @@ import { useEmojiExplosion } from '@/shared/components/EmojiExplosion';
  * "previous value" check so reloading a tab that's already at 5
  * doesn't replay the celebration.
  */
-export function GoalCelebration() {
+export const GoalCelebration = () => {
   const { applications } = useApplications();
   const explode = useEmojiExplosion();
   const previous = useRef(applications.length);
@@ -25,4 +25,4 @@ export function GoalCelebration() {
   }, [applications.length, explode]);
 
   return null;
-}
+};
