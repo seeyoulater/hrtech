@@ -47,6 +47,12 @@ importers:
       '@hrtech/shared':
         specifier: workspace:*
         version: link:../../packages/shared
+      '@iconify-icons/carbon':
+        specifier: ^1.2.20
+        version: 1.2.20
+      '@iconify-icons/svg-spinners':
+        specifier: ^1.2.0
+        version: 1.2.0
       '@iconify/react':
         specifier: ^6.0.2
         version: 6.0.2(react@19.2.5)
@@ -419,6 +425,12 @@ packages:
     resolution: {integrity: sha512-A/IxlMLShx3KjV/HeTcTfaMxdwy690+L/ZADoeaTltLx+CVuzkeVIPuybK3jrRfw7YZnmdKsVVHAlEPIAEUNlA==}
     peerDependencies:
       react-hook-form: ^7.55.0
+
+  '@iconify-icons/carbon@1.2.20':
+    resolution: {integrity: sha512-QCsqNX5VRK8ZqAnwDhUHdJFdRIDCHM3bF+72DUCIi1bQ6L8n5amOP4ZND2q1TadtAjP7g6DEnS2a6780iPjx9Q==}
+
+  '@iconify-icons/svg-spinners@1.2.0':
+    resolution: {integrity: sha512-QixEmTVSjuEviWksZiZ8yeMMXVGJ7Bi9HE2JqDkBtyF7VMpThneVdnas/RzQ5NqDslrTgc4SRo5ylEn6BTgbCw==}
 
   '@iconify/react@6.0.2':
     resolution: {integrity: sha512-SMmC2sactfpJD427WJEDN6PMyznTFMhByK9yLW0gOTtnjzzbsi/Ke/XqsumsavFPwNiXs8jSiYeZTmLCLwO+Fg==}
@@ -1905,6 +1917,14 @@ snapshots:
     dependencies:
       '@standard-schema/utils': 0.3.0
       react-hook-form: 7.74.0(react@19.2.5)
+
+  '@iconify-icons/carbon@1.2.20':
+    dependencies:
+      '@iconify/types': 2.0.0
+
+  '@iconify-icons/svg-spinners@1.2.0':
+    dependencies:
+      '@iconify/types': 2.0.0
 
   '@iconify/react@6.0.2(react@19.2.5)':
     dependencies:

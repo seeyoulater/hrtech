@@ -3,9 +3,9 @@ import { MemoryRouter } from 'react-router-dom';
 import { ConfirmProvider } from '@/shared/components/Confirm';
 import { EmojiExplosionProvider } from '@/shared/components/EmojiExplosion';
 import '@/styles/global.css';
-// Warm the same Iconify cache the real app uses, so stories render
-// icons from cache after the first visit.
-import '@/shared/components/Icon/preloadIcons';
+// Bundle + register the same icon set the real app ships, so stories
+// render icons synchronously from the in-memory store.
+import '@/shared/components/Icon/registerIcons';
 
 /**
  * Every story is wrapped in the same providers the real app mounts at
