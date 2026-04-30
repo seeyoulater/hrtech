@@ -1,0 +1,181 @@
+.layer {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 100;
+}
+
+/* Y axis: gravity-flavored ease-in. Falls slowly at first, accelerates
+   toward the bottom of the viewport. */
+.emojiY {
+  position: absolute;
+  top: 0;
+  left: var(--left);
+  font-size: var(--size);
+  line-height: 1;
+  user-select: none;
+  animation:
+    emojiFallY var(--duration) cubic-bezier(0.55, 0, 0.85, 0.4) var(--delay)
+      both;
+  will-change: transform, opacity;
+}
+
+/* X axis: smooth sinusoidal sway via ease-in-out between four keyframe
+   waypoints. Drift is unique per emoji. */
+.emojiX {
+  display: inline-block;
+  animation:
+    emojiSwayX var(--duration) cubic-bezier(0.42, 0, 0.58, 1) var(--delay) both;
+  will-change: transform;
+}
+
+/* Rotation + scale pulse: ease-out-quart on each segment gives each
+   beat a snap-and-settle character. Size pulses 0.4 → 1.25 → 0.92 →
+   1.08 → 0.95 → 1.0 across the fall, layered on top of the per-item
+   `--size` font-size. */
+.emojiSpin {
+  display: inline-block;
+  animation:
+    emojiSpinScale var(--duration) cubic-bezier(0.25, 1, 0.5, 1) var(--delay)
+      both;
+  will-change: transform;
+}
+
+@keyframes emojiFallY {
+  0% {
+    transform: translate3d(0, -120%, 0);
+    opacity: 0;
+  }
+  6% {
+    opacity: 1;
+  }
+  92% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(0, 110vh, 0);
+    opacity: 0;
+  }
+}
+
+@keyframes emojiSwayX {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  25% {
+    transform: translate3d(calc(var(--drift) * 0.55), 0, 0);
+  }
+  50% {
+    transform: translate3d(calc(var(--drift) * -0.35), 0, 0);
+  }
+  75% {
+    transform: translate3d(calc(var(--drift) * 0.75), 0, 0);
+  }
+  100% {
+    transform: translate3d(var(--drift), 0, 0);
+  }
+}
+
+@keyframes emojiSpinScale {
+  0% {
+    transform: rotate(0deg) scale(0.4);
+  }
+  10% {
+    transform: rotate(calc(var(--rotation) * 0.1)) scale(1.25);
+  }
+  30% {
+    transform: rotate(calc(var(--rotation) * 0.3)) scale(0.92);
+  }
+  55% {
+    transform: rotate(calc(var(--rotation) * 0.55)) scale(1.08);
+  }
+  80% {
+    transform: rotate(calc(var(--rotation) * 0.8)) scale(0.95);
+  }
+  100% {
+    transform: rotate(var(--rotation)) scale(1);
+  }
+}
+
+/* Centered burst text. Outer .message handles viewport centering; inner
+   .messageInner runs the pop-and-drift animation so the centering
+   transform isn't fought over. */
+.message {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 110;
+  max-width: min(90vw, 700px);
+  text-align: center;
+}
+
+.messageInner {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-weight: var(--weight-bold);
+  font-size: clamp(2.5rem, 7vw, 4.5rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--color-accent);
+  /* Sticker-style halo: 8-direction zero-blur near-white outline
+     creates a crisp clearance ring around the letterforms, so any
+     emoji falling behind the text can't touch the green edges. The
+     halo is invisible against the white page itself, but visible
+     wherever it knocks out the chaos behind. The two soft drops
+     beneath grounds the text with a celebratory floor-glow. */
+  text-shadow:
+    -2px -2px 0 oklch(0.99 0.003 95),
+    2px -2px 0 oklch(0.99 0.003 95),
+    -2px 2px 0 oklch(0.99 0.003 95),
+    2px 2px 0 oklch(0.99 0.003 95),
+    0 -2px 0 oklch(0.99 0.003 95),
+    0 2px 0 oklch(0.99 0.003 95),
+    -2px 0 0 oklch(0.99 0.003 95),
+    2px 0 0 oklch(0.99 0.003 95),
+    0 6px 16px oklch(0.4 0.08 150 / 0.3),
+    0 16px 48px oklch(0.55 0.11 150 / 0.18);
+  transform-origin: center;
+  animation:
+    burstIn 2400ms cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  will-change: transform, opacity;
+}
+
+@keyframes burstIn {
+  0% {
+    transform: scale(0.5) translateY(10px);
+    opacity: 0;
+  }
+  12% {
+    transform: scale(1.18) translateY(0);
+    opacity: 1;
+  }
+  22% {
+    transform: scale(0.96) translateY(0);
+    opacity: 1;
+  }
+  35% {
+    transform: scale(1.02) translateY(0);
+    opacity: 1;
+  }
+  45% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+  72% {
+    transform: scale(1) translateY(-2px);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.06) translateY(-36px);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .layer {
+    display: none;
+  }
+}

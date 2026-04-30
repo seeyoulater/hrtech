@@ -1,5 +1,7 @@
 import { BrowserRouter, Route, Routes, useParams } from 'react-router-dom';
 import { Header } from '@/components/Header';
+import { GoalCelebration } from '@/components/GoalCelebration';
+import { EmojiExplosionProvider } from '@/components/effects/EmojiExplosion';
 import { DashboardPage } from '@/pages/DashboardPage';
 import { GeneratorPage } from '@/pages/GeneratorPage';
 import { useApplications } from '@/hooks/useApplications';
@@ -38,7 +40,10 @@ function AppShell() {
 export default function App() {
   return (
     <BrowserRouter>
-      <AppShell />
+      <EmojiExplosionProvider>
+        <AppShell />
+        <GoalCelebration />
+      </EmojiExplosionProvider>
     </BrowserRouter>
   );
 }

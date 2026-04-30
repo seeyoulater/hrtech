@@ -1,0 +1,28 @@
+import { useEffect, useRef } from 'react';
+import { useApplications } from '@/hooks/useApplications';
+import { GOAL } from '@/lib/applications';
+import { useEmojiExplosion } from './effects/EmojiExplosion';
+
+/**
+ * Watches the application count and fires the emoji waterfall once
+ * when the user crosses the goal line (4 → 5+). Guarded by a ref so
+ * StrictMode's double-effect doesn't double-explode, and by the
+ * "previous value" check so reloading a tab that's already at 5
+ * doesn't replay the celebration.
+ */
+export function GoalCelebration() {
+  const { applications } = useApplications();
+  const explode = useEmojiExplosion();
+  const previous = useRef(applications.length);
+
+  useEffect(() => {
+    const before = previous.current;
+    const after = applications.length;
+    if (before < GOAL && after >= GOAL) {
+      explode();
+    }
+    previous.current = after;
+  }, [applications.length, explode]);
+
+  return null;
+}
