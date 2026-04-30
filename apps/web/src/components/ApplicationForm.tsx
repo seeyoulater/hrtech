@@ -1,109 +1,110 @@
-import type { ChangeEvent, FormEvent } from 'react';
+import { useForm, useWatch } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { TextField } from './ui/TextField';
 import { TextArea } from './ui/TextArea';
 import { Button } from './ui/Button';
 import { Icon } from './ui/Icon';
+import {
+  applicationSchema,
+  DETAILS_MAX,
+  EMPTY_FORM,
+  type FormValues,
+} from '@/lib/applicationSchema';
 import styles from './ApplicationForm.module.css';
 
-export type FormValues = {
-  jobTitle: string;
-  company: string;
-  strengths: string;
-  details: string;
-};
-
-export const EMPTY_FORM: FormValues = {
-  jobTitle: '',
-  company: '',
-  strengths: '',
-  details: '',
-};
-
-const DETAILS_MAX = 1200;
-
 type ApplicationFormProps = {
-  values: FormValues;
-  onChange: (next: FormValues) => void;
-  onSubmit: () => void;
+  defaultValues?: FormValues;
+  onSubmit: (values: FormValues) => void;
   loading: boolean;
   hasGenerated: boolean;
 };
 
+const headlineFor = (jobTitle: string, company: string): string => {
+  const role = jobTitle.trim();
+  const co = company.trim();
+  if (!role && !co) return 'New application';
+  if (role && co) return `${role}, ${co}`;
+  return role || co;
+};
+
 export function ApplicationForm({
-  values,
-  onChange,
+  defaultValues = EMPTY_FORM,
   onSubmit,
   loading,
   hasGenerated,
 }: ApplicationFormProps) {
-  const update =
-    <K extends keyof FormValues>(key: K) =>
-    (
-      e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-    ): void => {
-      onChange({ ...values, [key]: e.target.value });
-    };
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors, isValid },
+  } = useForm<FormValues>({
+    resolver: zodResolver(applicationSchema),
+    defaultValues,
+    mode: 'onChange',
+  });
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    onSubmit();
-  };
+  const live = useWatch({ control });
+  const headline = headlineFor(live.jobTitle ?? '', live.company ?? '');
+  const detailsLength = live.details?.length ?? 0;
 
-  const canSubmit =
-    values.jobTitle.trim().length > 0 && values.company.trim().length > 0;
+  const submit = handleSubmit((vals) => onSubmit(vals));
+  const canSubmit = isValid && !loading;
 
   return (
-    <form className={styles.form} onSubmit={handleSubmit} noValidate>
-      <div className={styles.row}>
+    <div className={styles.wrap}>
+      <h1 className={styles.title}>{headline}</h1>
+      <form className={styles.form} onSubmit={submit} noValidate>
+        <div className={styles.row}>
+          <TextField
+            label="Job title"
+            placeholder="Product manager"
+            autoComplete="off"
+            error={!!errors.jobTitle}
+            {...register('jobTitle')}
+          />
+          <TextField
+            label="Company"
+            placeholder="Apple"
+            autoComplete="off"
+            error={!!errors.company}
+            {...register('company')}
+          />
+        </div>
         <TextField
-          label="Job title"
-          placeholder="Product manager"
-          value={values.jobTitle}
-          onChange={update('jobTitle')}
+          label="I am good at..."
+          placeholder="HTML, CSS and doing things in time"
           autoComplete="off"
-          required
+          error={!!errors.strengths}
+          {...register('strengths')}
         />
-        <TextField
-          label="Company"
-          placeholder="Apple"
-          value={values.company}
-          onChange={update('company')}
-          autoComplete="off"
-          required
+        <TextArea
+          label="Additional details"
+          placeholder="What should we mention? Projects, results, what you're looking for…"
+          showCounter
+          countMax={DETAILS_MAX}
+          count={detailsLength}
+          error={!!errors.details}
+          {...register('details')}
         />
-      </div>
-      <TextField
-        label="I am good at..."
-        placeholder="HTML, CSS and doing things in time"
-        value={values.strengths}
-        onChange={update('strengths')}
-        autoComplete="off"
-      />
-      <TextArea
-        label="Additional details"
-        placeholder="What should we mention? Projects, results, what you're looking for…"
-        value={values.details}
-        onChange={update('details')}
-        maxLength={DETAILS_MAX}
-        showCounter
-      />
-      <Button
-        type="submit"
-        size="lg"
-        variant={hasGenerated ? 'secondary' : 'primary'}
-        fullWidth
-        loading={loading}
-        disabled={!canSubmit}
-        iconLeft={
-          loading ? (
-            <span className={styles.spinner} aria-hidden="true" />
-          ) : hasGenerated ? (
-            <Icon name="refresh" size={18} />
-          ) : null
-        }
-      >
-        {loading ? 'Generating…' : hasGenerated ? 'Try Again' : 'Generate Now'}
-      </Button>
-    </form>
+        <Button
+          type="submit"
+          size="lg"
+          variant={hasGenerated ? 'secondary' : 'primary'}
+          fullWidth
+          loading={loading}
+          disabled={!canSubmit}
+          iconLeft={
+            loading ? (
+              <span className={styles.spinner} aria-hidden="true" />
+            ) : hasGenerated ? (
+              <Icon name="refresh" size={18} />
+            ) : null
+          }
+        >
+          {loading ? 'Generating…' : hasGenerated ? 'Try Again' : 'Generate Now'}
+        </Button>
+      </form>
+    </div>
   );
 }

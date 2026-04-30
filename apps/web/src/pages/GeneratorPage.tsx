@@ -1,18 +1,14 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
-import {
-  ApplicationForm,
-  EMPTY_FORM,
-  type FormValues,
-} from '@/components/ApplicationForm';
+import { useEffect, useRef, useState } from 'react';
+import { ApplicationForm } from '@/components/ApplicationForm';
 import { LetterPreview } from '@/components/LetterPreview';
 import { GoalBanner } from '@/components/GoalBanner';
 import { useApplications } from '@/hooks/useApplications';
 import { generateLetter } from '@/lib/ai';
+import type { FormValues } from '@/lib/applicationSchema';
 import styles from './GeneratorPage.module.css';
 
 export function GeneratorPage() {
   const { applications, create, update } = useApplications();
-  const [values, setValues] = useState<FormValues>(EMPTY_FORM);
   const [letter, setLetter] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -24,15 +20,7 @@ export function GeneratorPage() {
     return () => abortRef.current?.abort();
   }, []);
 
-  const headline = useMemo(() => {
-    const role = values.jobTitle.trim();
-    const co = values.company.trim();
-    if (!role && !co) return 'New application';
-    if (role && co) return `${role}, ${co}`;
-    return role || co;
-  }, [values.jobTitle, values.company]);
-
-  const handleGenerate = async () => {
+  const handleGenerate = async (values: FormValues) => {
     abortRef.current?.abort();
     const controller = new AbortController();
     abortRef.current = controller;
@@ -70,10 +58,7 @@ export function GeneratorPage() {
     <div className={styles.page}>
       <div className={styles.layout}>
         <section className={styles.formCol}>
-          <h1 className={styles.title}>{headline}</h1>
           <ApplicationForm
-            values={values}
-            onChange={setValues}
             onSubmit={handleGenerate}
             loading={loading}
             hasGenerated={Boolean(savedId) || letter.length > 0}
