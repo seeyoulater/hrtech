@@ -1,0 +1,1 @@
+import{n as e}from"./chunk-DnJy8xQt.js";var t,n=e((()=>{t=`hrtech.applications.v1`}));export{n,t};

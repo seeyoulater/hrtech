@@ -1,0 +1,14 @@
+import{n as e}from"./chunk-DnJy8xQt.js";import{_ as t,d as n,g as r,h as i,u as a}from"./iframe-BU8amx9X.js";import{t as o}from"./Card-bxtq4sTH.js";import{t as s}from"./Card-CM4dU1je.js";import{t as c}from"./Icon-Dv6YBEu-.js";import{t as l}from"./Icon-Bl_7szNe.js";import{n as u,t as d}from"./useCopy-D44O9V8o.js";var f,p,m,h,g,_,v,y,b=e((()=>{f=`_card_173lr_1`,p=`_bodyLink_173lr_20`,m=`_body_173lr_20`,h=`_text_173lr_43`,g=`_fade_173lr_51`,_=`_openCue_173lr_64`,v=`_actions_173lr_93`,y={card:f,bodyLink:p,body:m,text:h,fade:g,openCue:_,actions:v}}));function x({application:e,onDelete:r}){let{copied:i,copy:a}=u();return(0,S.jsxs)(o,{className:y.card,children:[(0,S.jsx)(t,{to:`/applications/${e.id}`,className:y.bodyLink,"aria-label":`Open application for ${e.company||`this company`}`,children:(0,S.jsxs)(`div`,{className:y.body,children:[(0,S.jsx)(`p`,{className:y.text,children:e.letter}),(0,S.jsx)(`span`,{className:y.fade,"aria-hidden":`true`}),(0,S.jsx)(`span`,{className:y.openCue,"aria-hidden":`true`,children:(0,S.jsx)(c,{name:`arrow-out`,size:14})})]})}),(0,S.jsxs)(`div`,{className:y.actions,children:[(0,S.jsx)(n,{variant:`ghost`,size:`md`,iconLeft:(0,S.jsx)(c,{name:`trash`,size:16}),onClick:()=>r(e.id),children:`Delete`}),(0,S.jsx)(n,{variant:`ghost`,size:`md`,iconRight:(0,S.jsx)(c,{name:i?`check`:`copy`,size:16}),onClick:()=>a(e.letter),children:i?`Copied`:`Copy to clipboard`})]})]})}var S,C=e((()=>{r(),s(),a(),l(),d(),b(),S=i()})),w,T,E,D,O,k,A;e((()=>{C(),w=i(),{fn:T}=__STORYBOOK_MODULE_TEST__,E={id:`sample-1`,jobTitle:`Senior Engineer`,company:`Stripe`,strengths:`Design systems and reliable shipping`,details:`5 years on developer tooling`,letter:`Dear Stripe Team,
+
+I am excited to apply for the Senior Engineer position. With five years of experience in developer tooling, I have honed my skills in creating robust design systems that enhance usability and streamline processes.
+
+Throughout my career, I have consistently delivered reliable shipping solutions that meet the needs of both developers and end-users.`,createdAt:Date.now(),updatedAt:Date.now()},D={title:`App/ApplicationCard`,component:x,args:{application:E,onDelete:T()},render:e=>(0,w.jsx)(`div`,{style:{width:360},children:(0,w.jsx)(x,{...e})})},O={},k={args:{application:{...E,letter:`Dear Stripe Team,
+
+I’m interested in the role.`}}},O.parameters={...O.parameters,docs:{...O.parameters?.docs,source:{originalSource:`{}`,...O.parameters?.docs?.source}}},k.parameters={...k.parameters,docs:{...k.parameters?.docs,source:{originalSource:`{
+  args: {
+    application: {
+      ...sampleApplication,
+      letter: 'Dear Stripe Team,\\n\\nI’m interested in the role.'
+    }
+  }
+}`,...k.parameters?.docs?.source}}},A=[`Default`,`ShortLetter`]}))();export{O as Default,k as ShortLetter,A as __namedExportsOrder,D as default};
