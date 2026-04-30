@@ -16,6 +16,9 @@ dist-ssr
 .env.local
 .env.*.local
 
+# Fastify in dev — pino-pretty noise / runtime logs
+*.log
+
 # Editor
 .vscode/*
 !.vscode/extensions.json

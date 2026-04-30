@@ -1,0 +1,29 @@
+.row {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.dot {
+  display: inline-block;
+  border-radius: var(--radius-pill);
+}
+
+.size_sm .dot {
+  width: 8px;
+  height: 8px;
+}
+
+.size_md .dot {
+  width: 22px;
+  height: 6px;
+  border-radius: 3px;
+}
+
+.filled {
+  background: var(--color-progress-filled);
+}
+
+.empty {
+  background: var(--color-progress-empty);
+}
