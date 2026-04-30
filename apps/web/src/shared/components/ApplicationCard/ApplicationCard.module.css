@@ -99,7 +99,7 @@
   margin-top: auto;
 }
 
-@media (prefers-reduced-motion: reduce) {
+@media (--reduce-motion) {
   .card,
   .card:has(.bodyLink:hover),
   .card:has(.bodyLink:focus-visible),

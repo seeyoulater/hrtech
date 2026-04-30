@@ -1,0 +1,35 @@
+/*
+ * Single source of truth for responsive breakpoints.
+ *
+ * - The `--bp-*` custom properties are runtime CSS variables. Use them
+ *   in CSS rules where you need a numeric breakpoint value
+ *   (e.g. inside `clamp()` or `calc()`).
+ * - The `@custom-media` rules are build-time macros expanded by the
+ *   `postcss-custom-media` plugin (see postcss.config.js). Use them in
+ *   `@media (--mobile) { … }` etc. — never write raw `(max-width: …)`
+ *   anywhere else in the codebase.
+ */
+
+:root {
+  --bp-mobile: 480px;
+  --bp-tablet: 720px;
+  --bp-laptop: 1024px;
+  --bp-desktop: 1280px;
+}
+
+/* Max-width queries (mobile-first up; targets the small end). */
+@custom-media --mobile (max-width: 480px);
+@custom-media --tablet-down (max-width: 720px);
+@custom-media --laptop-down (max-width: 1024px);
+@custom-media --desktop-down (max-width: 1280px);
+
+/* Min-width queries (target the large end; useful for progressive enhancement). */
+@custom-media --tablet-up (min-width: 481px);
+@custom-media --laptop-up (min-width: 721px);
+@custom-media --desktop-up (min-width: 1025px);
+@custom-media --wide-up (min-width: 1281px);
+
+/* User preferences. */
+@custom-media --reduce-motion (prefers-reduced-motion: reduce);
+@custom-media --reduce-transparency (prefers-reduced-transparency: reduce);
+@custom-media --dark (prefers-color-scheme: dark);

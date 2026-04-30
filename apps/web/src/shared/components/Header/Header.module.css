@@ -55,7 +55,7 @@
   flex-shrink: 0;
 }
 
-@media (max-width: 520px) {
+@media (--mobile) {
   .progressLabel {
     display: none;
   }

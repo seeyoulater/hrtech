@@ -32,7 +32,7 @@
   gap: var(--space-4);
 }
 
-@media (max-width: 720px) {
+@media (--tablet-down) {
   .grid {
     grid-template-columns: 1fr;
   }

@@ -23,7 +23,7 @@
   gap: var(--space-4);
 }
 
-@media (max-width: 520px) {
+@media (--mobile) {
   .row {
     grid-template-columns: 1fr;
   }

@@ -32,7 +32,7 @@
   font-variant-numeric: tabular-nums;
 }
 
-@media (max-width: 520px) {
+@media (--mobile) {
   .banner {
     padding: var(--space-7) var(--space-5);
     border-radius: var(--radius-lg);

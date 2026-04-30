@@ -23,7 +23,7 @@
   min-height: 100%;
 }
 
-@media (max-width: 900px) {
+@media (--laptop-down) {
   .layout {
     grid-template-columns: 1fr;
     gap: var(--space-5);
