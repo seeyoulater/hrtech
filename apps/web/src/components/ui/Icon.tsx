@@ -7,7 +7,8 @@ type IconName =
   | 'check'
   | 'home'
   | 'refresh'
-  | 'logo';
+  | 'logo'
+  | 'arrow-out';
 
 type IconProps = SVGProps<SVGSVGElement> & {
   name: IconName;
@@ -80,6 +81,16 @@ const PATHS: Record<IconName, ReactElement> = {
       d="M15.5 7.5A6 6 0 1 0 16 12.5M15.5 4v3.5H12"
       stroke="currentColor"
       strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      fill="none"
+    />
+  ),
+  'arrow-out': (
+    <path
+      d="M7 13 L13 7 M13 7 L8 7 M13 7 L13 12"
+      stroke="currentColor"
+      strokeWidth="1.6"
       strokeLinecap="round"
       strokeLinejoin="round"
       fill="none"
