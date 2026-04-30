@@ -21,7 +21,6 @@
 # Misc
 *.log
 README.md
-docker-compose.yml
 **/Dockerfile
 .dockerignore
 .nvmrc

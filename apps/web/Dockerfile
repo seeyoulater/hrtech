@@ -15,12 +15,18 @@ RUN --mount=type=cache,id=pnpm,target=/root/.local/share/pnpm/store \
     pnpm install --frozen-lockfile
 
 # 3) Build the static bundle
+#    VITE_API_URL is inlined into the bundle by Vite at build time —
+#    pass it via --build-arg so the deployed bundle knows where the
+#    API lives. Leave empty to use same-origin /api/* (e.g. behind a
+#    reverse proxy).
 FROM deps AS build
+ARG VITE_API_URL=""
+ENV VITE_API_URL=$VITE_API_URL
 COPY packages/shared ./packages/shared
 COPY apps/web ./apps/web
 RUN pnpm --filter @hrtech/web run build
 
-# 4) Serve with nginx; proxy /api → api:3001 (defined in compose network)
+# 4) Serve the static bundle with nginx
 FROM nginx:1.27-alpine AS runtime
 COPY apps/web/nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=build /repo/apps/web/dist /usr/share/nginx/html
