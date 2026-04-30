@@ -16,11 +16,27 @@ const generateBodySchema = {
   required: ['jobTitle', 'company'],
   additionalProperties: false,
   properties: {
-    jobTitle: { type: 'string', maxLength: 200 },
-    company: { type: 'string', maxLength: 200 },
-    strengths: { type: 'string', maxLength: 1000, default: '' },
-    details: { type: 'string', maxLength: 1200, default: '' },
+    jobTitle: { type: 'string', maxLength: 200, examples: ['Product manager'] },
+    company: { type: 'string', maxLength: 200, examples: ['Apple'] },
+    strengths: {
+      type: 'string',
+      maxLength: 1000,
+      default: '',
+      examples: ['Design systems and reliable shipping'],
+    },
+    details: {
+      type: 'string',
+      maxLength: 1200,
+      default: '',
+      examples: ['5 years on developer tooling'],
+    },
   },
+} as const;
+
+const errorResponseSchema = {
+  type: 'object',
+  required: ['error'],
+  properties: { error: { type: 'string' } },
 } as const;
 
 /**
@@ -35,7 +51,28 @@ export const generateRoute: FastifyPluginAsync<GenerateRouteOptions> = async (
 ) => {
   app.post<{ Body: GenerateInput }>(
     '/api/generate',
-    { schema: { body: generateBodySchema } },
+    {
+      schema: {
+        tags: ['generate'],
+        summary: 'Stream a generated cover letter',
+        description:
+          'Returns OpenAI-format Server-Sent Events. Each `data:` frame ' +
+          'contains a `choices[0].delta.content` token; the stream ends ' +
+          'with `data: [DONE]`. The same shape is produced by the mock ' +
+          'fallback when the backend has no API key.',
+        body: generateBodySchema,
+        response: {
+          // 200 is the streamed response; declared loosely since the
+          // body is text/event-stream, not JSON.
+          200: {
+            description: 'OpenAI-format SSE stream of letter tokens.',
+            type: 'string',
+          },
+          400: errorResponseSchema,
+          502: errorResponseSchema,
+        },
+      },
+    },
     async (request, reply) => {
       const input = request.body;
       const controller = new AbortController();

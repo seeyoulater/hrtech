@@ -1,5 +1,7 @@
 import Fastify from 'fastify';
 import cors from '@fastify/cors';
+import swagger from '@fastify/swagger';
+import swaggerUi from '@fastify/swagger-ui';
 import { healthRoute } from './routes/health.js';
 import { generateRoute } from './routes/generate.js';
 
@@ -27,6 +29,42 @@ async function buildServer() {
         ? true
         : CORS_ORIGIN.split(',').map((o) => o.trim()),
     methods: ['GET', 'POST', 'OPTIONS'],
+  });
+
+  // Swagger MUST be registered before the routes so it can collect
+  // their schemas as they're added.
+  await app.register(swagger, {
+    openapi: {
+      info: {
+        title: 'Alt+Shift HR Tech API',
+        description:
+          'Cover-letter generation backend. Proxies OpenAI Chat ' +
+          'Completions with streaming and a deterministic mock fallback.',
+        version: '0.0.0',
+      },
+      servers: [
+        { url: 'http://localhost:3001', description: 'Local development' },
+        {
+          url: 'https://hrtech.sliplane.app',
+          description: 'Production',
+        },
+      ],
+      tags: [
+        { name: 'health', description: 'Service status' },
+        { name: 'generate', description: 'AI cover-letter generation' },
+      ],
+    },
+  });
+
+  await app.register(swaggerUi, {
+    // UI at /docs, JSON spec at /docs/json, YAML at /docs/yaml.
+    routePrefix: '/docs',
+    uiConfig: {
+      docExpansion: 'list',
+      deepLinking: true,
+      displayRequestDuration: true,
+    },
+    staticCSP: true,
   });
 
   await app.register(healthRoute, {
