@@ -12,7 +12,7 @@ export type Application = {
 export const GOAL = 5;
 export const STORAGE_KEY = 'hrtech.applications.v1';
 
-const isApplication = (v: unknown): v is Application => {
+export const isApplication = (v: unknown): v is Application => {
   if (!v || typeof v !== 'object') return false;
   const a = v as Record<string, unknown>;
   return (
@@ -26,21 +26,3 @@ const isApplication = (v: unknown): v is Application => {
     typeof a.updatedAt === 'number'
   );
 };
-
-export function loadApplications(): Application[] {
-  if (typeof window === 'undefined') return [];
-  try {
-    const raw = window.localStorage.getItem(STORAGE_KEY);
-    if (!raw) return [];
-    const parsed = JSON.parse(raw);
-    if (!Array.isArray(parsed)) return [];
-    return parsed.filter(isApplication);
-  } catch {
-    return [];
-  }
-}
-
-export function saveApplications(apps: Application[]): void {
-  if (typeof window === 'undefined') return;
-  window.localStorage.setItem(STORAGE_KEY, JSON.stringify(apps));
-}

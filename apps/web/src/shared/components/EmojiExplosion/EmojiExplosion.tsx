@@ -1,26 +1,25 @@
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useState,
-} from 'react';
-import type { CSSProperties, ReactNode } from 'react';
-import { nanoid } from 'nanoid';
-import styles from './EmojiExplosion.module.css';
+import { createContext, useCallback, useContext, useState } from "react";
+import type { CSSProperties, ReactNode } from "react";
+import { nanoid } from "nanoid";
+import styles from "./EmojiExplosion.module.css";
 
-const DEFAULT_EMOJIS = ['🎉', '🥳', '👊', '🥹', '🤘', '🤩', '🥰'];
+const DEFAULT_EMOJIS = ["🎉", "🥳", "👊", "🥹", "🤘", "🤩", "🥰"];
 
 const DEFAULT_MESSAGES = [
-  'Nice one!',
-  'Five down.',
-  'You did it!',
-  'Goal smashed!',
-  'Crushing it!',
-  'Sent it!',
-  'Take a bow.',
-  'Locked in!',
-  'Big energy.',
-  'You earned this.',
+  "Nice one!",
+  "Five down.",
+  "You did it!",
+  "Goal smashed!",
+  "Crushing it!",
+  "Sent it!",
+  "Take a bow.",
+  "Locked in!",
+  "Big energy.",
+  "You earned this.",
+  "YAAAAAY!",
+  "WOHOOOO!!!",
+  "Keep it up!",
+  "Slow down buddy!....",
 ];
 
 const MESSAGE_DURATION_MS = 2400;
@@ -94,7 +93,7 @@ export function EmojiExplosionProvider({ children }: { children: ReactNode }) {
     let text: string | null;
     if (opts?.message === null) {
       text = null;
-    } else if (typeof opts?.message === 'string') {
+    } else if (typeof opts?.message === "string") {
       text = opts.message;
     } else {
       text = pick(opts?.messages ?? DEFAULT_MESSAGES);
@@ -119,12 +118,12 @@ export function EmojiExplosionProvider({ children }: { children: ReactNode }) {
             className={styles.emojiY}
             style={
               {
-                '--left': `${item.left}%`,
-                '--delay': `${item.delay}ms`,
-                '--duration': `${item.duration}ms`,
-                '--drift': `${item.drift}px`,
-                '--size': `${item.size}rem`,
-                '--rotation': `${item.rotation}deg`,
+                "--left": `${item.left}%`,
+                "--delay": `${item.delay}ms`,
+                "--duration": `${item.duration}ms`,
+                "--drift": `${item.drift}px`,
+                "--size": `${item.size}rem`,
+                "--rotation": `${item.rotation}deg`,
               } as CSSProperties
             }
           >
@@ -147,7 +146,7 @@ export function useEmojiExplosion(): Explode {
   const ctx = useContext(EmojiContext);
   if (!ctx) {
     throw new Error(
-      'useEmojiExplosion must be used inside <EmojiExplosionProvider>',
+      "useEmojiExplosion must be used inside <EmojiExplosionProvider>",
     );
   }
   return ctx;
