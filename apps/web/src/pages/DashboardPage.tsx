@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Button } from '@/shared/components/Button';
 import { Icon } from '@/shared/components/Icon';
+import { Grid } from '@/shared/components/Grid';
 import { ApplicationCard } from '@/shared/components/ApplicationCard';
 import { EmptyState } from '@/shared/components/EmptyState';
 import { GoalBanner } from '@/shared/components/GoalBanner';
@@ -31,13 +32,13 @@ export function DashboardPage() {
       {isEmpty ? (
         <EmptyState />
       ) : (
-        <ul className={styles.grid}>
+        <Grid as="ul" columns={2} collapse="tabletDown" gap={4}>
           {applications.map((a) => (
             <li key={a.id}>
               <ApplicationCard application={a} onDelete={handleDelete} />
             </li>
           ))}
-        </ul>
+        </Grid>
       )}
 
       <GoalBanner count={applications.length} />
