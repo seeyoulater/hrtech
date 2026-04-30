@@ -1,0 +1,38 @@
+# syntax=docker/dockerfile:1.7
+#
+# Storybook static export, served by nginx. Runs independently of the
+# main web app (and the API). Build context is the monorepo root so
+# pnpm-lock + workspaces resolve correctly:
+#
+#   docker build -f apps/web/Dockerfile.storybook -t hrtech-storybook .
+#   docker run --rm -p 6006:80 hrtech-storybook
+#   # → http://localhost:6006
+
+# 1) Common pnpm-enabled base
+FROM node:22-alpine AS base
+WORKDIR /repo
+RUN corepack enable && corepack prepare pnpm@9.4.0 --activate
+
+# 2) Install workspace dependencies
+FROM base AS deps
+COPY pnpm-workspace.yaml pnpm-lock.yaml package.json ./
+COPY apps/api/package.json apps/api/
+COPY apps/web/package.json apps/web/
+COPY packages/shared/package.json packages/shared/
+RUN --mount=type=cache,id=pnpm,target=/root/.local/share/pnpm/store \
+    pnpm install --frozen-lockfile
+
+# 3) Build the static Storybook export
+FROM deps AS build
+COPY packages/shared ./packages/shared
+COPY apps/web ./apps/web
+RUN pnpm --filter @hrtech/web run build-storybook
+
+# 4) Serve with nginx (reuses the same gzip + asset-cache config as
+#    the web app — the SPA fallback is harmless for Storybook).
+FROM nginx:1.27-alpine AS runtime
+COPY apps/web/nginx.conf /etc/nginx/conf.d/default.conf
+COPY --from=build /repo/apps/web/storybook-static /usr/share/nginx/html
+EXPOSE 80
+HEALTHCHECK --interval=10s --timeout=3s --start-period=5s --retries=5 \
+  CMD wget --quiet --tries=1 --spider http://127.0.0.1/ || exit 1
