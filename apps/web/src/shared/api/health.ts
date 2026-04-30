@@ -1,5 +1,5 @@
 import type { HealthResponse } from '@hrtech/shared';
-import { API_BASE } from '@/constants/api';
+import { API_BASE } from '@/shared/constants/api';
 
 /**
  * GET /api/health — reports backend status: whether OpenAI credentials

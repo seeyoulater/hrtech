@@ -3,7 +3,7 @@ import { Logo } from '@/shared/components/Logo';
 import { ProgressDots } from '@/shared/components/ProgressDots';
 import { IconButton } from '@/shared/components/IconButton';
 import { Icon } from '@/shared/components/Icon';
-import { GOAL } from '@/constants/application';
+import { GOAL } from '@/shared/constants/application';
 import styles from './Header.module.css';
 
 type HeaderProps = {

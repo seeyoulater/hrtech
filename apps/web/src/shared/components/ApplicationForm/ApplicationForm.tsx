@@ -6,7 +6,7 @@ import { Button } from '@/shared/components/Button';
 import { Icon } from '@/shared/components/Icon';
 import { applicationSchema } from '@/shared/scheme';
 import type { FormValues } from '@/shared/types/form';
-import { DETAILS_MAX, EMPTY_FORM } from '@/constants/form';
+import { DETAILS_MAX, EMPTY_FORM } from '@/shared/constants/form';
 import styles from './ApplicationForm.module.css';
 
 type ApplicationFormProps = {

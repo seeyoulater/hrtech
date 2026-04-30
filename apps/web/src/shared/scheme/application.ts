@@ -4,11 +4,11 @@ import {
   DETAILS_MAX,
   STRENGTHS_MAX,
   TITLE_MAX,
-} from '@/constants/form';
+} from '@/shared/constants/form';
 
 /**
  * Validation schema for the application form. Field caps come from
- * `@/constants/form` so the form, the schema, and the UI counter all
+ * `@/shared/constants/form` so the form, the schema, and the UI counter all
  * read from the same numbers.
  */
 export const applicationSchema = z.object({

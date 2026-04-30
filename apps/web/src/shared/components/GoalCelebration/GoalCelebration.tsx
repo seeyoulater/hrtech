@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { useApplications } from '@/shared/hooks/useApplications';
-import { GOAL } from '@/constants/application';
+import { GOAL } from '@/shared/constants/application';
 import { useEmojiExplosion } from '@/shared/components/EmojiExplosion';
 
 /**

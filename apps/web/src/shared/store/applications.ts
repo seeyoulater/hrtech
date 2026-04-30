@@ -1,7 +1,7 @@
 import { atom } from 'jotai';
 import { atomWithStorage } from 'jotai/utils';
 import { nanoid } from 'nanoid';
-import { STORAGE_KEY } from '@/constants/application';
+import { STORAGE_KEY } from '@/shared/constants/application';
 import type {
   Application,
   CreateApplicationInput,

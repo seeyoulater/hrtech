@@ -5,7 +5,7 @@ import { LetterPreview } from '@/shared/components/LetterPreview';
 import { GoalBanner } from '@/shared/components/GoalBanner';
 import { useApplications } from '@/shared/hooks/useApplications';
 import { api } from '@/shared/api';
-import { EMPTY_FORM } from '@/constants/form';
+import { EMPTY_FORM } from '@/shared/constants/form';
 import type { FormValues } from '@/shared/types/form';
 import styles from './GeneratorPage.module.css';
 

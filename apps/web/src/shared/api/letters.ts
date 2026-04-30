@@ -1,5 +1,5 @@
 import type { GenerateInput } from '@hrtech/shared';
-import { API_BASE } from '@/constants/api';
+import { API_BASE } from '@/shared/constants/api';
 import type { StreamHandlers } from '@/shared/types/api';
 
 /**
