@@ -1,10 +1,7 @@
 import Fastify from 'fastify';
 import cors from '@fastify/cors';
-import type {
-  GenerateError,
-  GenerateInput,
-  HealthResponse,
-} from '@hrtech/shared';
+import { Readable } from 'node:stream';
+import type { GenerateInput, HealthResponse } from '@hrtech/shared';
 import { openOpenAiStream } from './openai.js';
 import { mockOpenAiSseStream } from './mock.js';
 
@@ -49,7 +46,7 @@ async function buildServer() {
     model: OPENAI_MODEL,
   }));
 
-  app.post<{ Body: GenerateInput; Reply: GenerateError | string }>(
+  app.post<{ Body: GenerateInput }>(
     '/api/generate',
     { schema: { body: generateBodySchema } },
     async (request, reply) => {
@@ -57,8 +54,8 @@ async function buildServer() {
       const controller = new AbortController();
       // Cancel the upstream request if the client disconnects mid-stream.
       // (`reply.raw` is the response; its 'close' fires on the client's
-      // socket close OR after we ourselves call .end() — either way an
-      // already-completed AbortController.abort() is a no-op.)
+      // socket close OR after we ourselves end it — abort() on an
+      // already-completed controller is a no-op.)
       reply.raw.on('close', () => {
         if (!controller.signal.aborted) controller.abort();
       });
@@ -85,30 +82,17 @@ async function buildServer() {
         upstreamBody = mockOpenAiSseStream(input, controller.signal);
       }
 
-      reply.raw.statusCode = 200;
-      reply.raw.setHeader('Content-Type', 'text/event-stream; charset=utf-8');
-      reply.raw.setHeader('Cache-Control', 'no-store, no-transform');
-      reply.raw.setHeader('Connection', 'keep-alive');
-      // Disable proxy buffering (nginx, vercel-style edges).
-      reply.raw.setHeader('X-Accel-Buffering', 'no');
-      reply.raw.flushHeaders?.();
-
-      const reader = upstreamBody.getReader();
-      try {
-        while (true) {
-          const { value, done } = await reader.read();
-          if (done) break;
-          if (!reply.raw.write(value)) {
-            await new Promise<void>((res) => reply.raw.once('drain', res));
-          }
-        }
-      } catch (err) {
-        if ((err as Error).name !== 'AbortError') {
-          request.log.error({ err }, 'stream error');
-        }
-      } finally {
-        reply.raw.end();
-      }
+      // Pipe through Fastify's reply pipeline (NOT reply.raw) so the
+      // @fastify/cors `onSend` hook runs and adds Access-Control-Allow-*
+      // headers to this streaming response. `X-Accel-Buffering: no`
+      // tells nginx-style proxies to flush per-chunk.
+      return reply
+        .code(200)
+        .header('Content-Type', 'text/event-stream; charset=utf-8')
+        .header('Cache-Control', 'no-store, no-transform')
+        .header('Connection', 'keep-alive')
+        .header('X-Accel-Buffering', 'no')
+        .send(Readable.fromWeb(upstreamBody as never));
     },
   );
 
