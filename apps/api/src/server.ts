@@ -42,13 +42,10 @@ async function buildServer() {
           'Completions with streaming and a deterministic mock fallback.',
         version: '0.0.0',
       },
-      servers: [
-        { url: 'http://localhost:3001', description: 'Local development' },
-        {
-          url: 'https://hrtech.sliplane.app',
-          description: 'Production',
-        },
-      ],
+      // No `servers` block on purpose. Swagger UI then targets the
+      // same origin the docs page was loaded from — localhost in dev,
+      // the prod hostname in prod — which matches the strict CSP that
+      // `staticCSP: true` installs on the docs page.
       tags: [
         { name: 'health', description: 'Service status' },
         { name: 'generate', description: 'AI cover-letter generation' },
