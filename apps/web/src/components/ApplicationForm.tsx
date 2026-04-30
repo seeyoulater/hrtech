@@ -90,23 +90,19 @@ export function ApplicationForm({
       <Button
         type="submit"
         size="lg"
-        variant="secondary"
+        variant={hasGenerated ? 'secondary' : 'primary'}
         fullWidth
         loading={loading}
         disabled={!canSubmit}
         iconLeft={
           loading ? (
             <span className={styles.spinner} aria-hidden="true" />
-          ) : (
+          ) : hasGenerated ? (
             <Icon name="refresh" size={18} />
-          )
+          ) : null
         }
       >
-        {loading
-          ? 'Generating…'
-          : hasGenerated
-            ? 'Try Again'
-            : 'Generate cover letter'}
+        {loading ? 'Generating…' : hasGenerated ? 'Try Again' : 'Generate Now'}
       </Button>
     </form>
   );

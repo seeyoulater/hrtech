@@ -21,6 +21,8 @@
 .title {
   font-size: var(--text-3xl);
   margin: 0;
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--color-border);
 }
 
 .previewCol {
