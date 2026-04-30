@@ -1,11 +1,11 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ApplicationForm } from '@/components/ApplicationForm';
-import { LetterPreview } from '@/components/LetterPreview';
-import { GoalBanner } from '@/components/GoalBanner';
-import { useApplications } from '@/hooks/useApplications';
-import { generateLetter } from '@/lib/ai';
-import { EMPTY_FORM, type FormValues } from '@/lib/applicationSchema';
+import { ApplicationForm } from '@/shared/components/ApplicationForm';
+import { LetterPreview } from '@/shared/components/LetterPreview';
+import { GoalBanner } from '@/shared/components/GoalBanner';
+import { useApplications } from '@/shared/hooks/useApplications';
+import { generateLetter } from '@/shared/lib/ai';
+import { EMPTY_FORM, type FormValues } from '@/shared/lib/applicationSchema';
 import styles from './GeneratorPage.module.css';
 
 type GeneratorPageProps = {

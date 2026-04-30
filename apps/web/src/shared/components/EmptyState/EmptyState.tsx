@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
-import { Button } from './ui/Button';
-import { Icon } from './ui/Icon';
+import { Button } from '@/shared/components/Button';
+import { Icon } from '@/shared/components/Icon';
 import styles from './EmptyState.module.css';
 
 export function EmptyState() {

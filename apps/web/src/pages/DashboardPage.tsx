@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
-import { Button } from '@/components/ui/Button';
-import { Icon } from '@/components/ui/Icon';
-import { ApplicationCard } from '@/components/ApplicationCard';
-import { EmptyState } from '@/components/EmptyState';
-import { GoalBanner } from '@/components/GoalBanner';
-import { useApplications } from '@/hooks/useApplications';
+import { Button } from '@/shared/components/Button';
+import { Icon } from '@/shared/components/Icon';
+import { ApplicationCard } from '@/shared/components/ApplicationCard';
+import { EmptyState } from '@/shared/components/EmptyState';
+import { GoalBanner } from '@/shared/components/GoalBanner';
+import { useApplications } from '@/shared/hooks/useApplications';
 import styles from './DashboardPage.module.css';
 
 export function DashboardPage() {

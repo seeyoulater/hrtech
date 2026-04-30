@@ -1,10 +1,10 @@
 import { BrowserRouter, Route, Routes, useParams } from 'react-router-dom';
-import { Header } from '@/components/Header';
-import { GoalCelebration } from '@/components/GoalCelebration';
-import { EmojiExplosionProvider } from '@/components/effects/EmojiExplosion';
+import { Header } from '@/shared/components/Header';
+import { GoalCelebration } from '@/shared/components/GoalCelebration';
+import { EmojiExplosionProvider } from '@/shared/components/EmojiExplosion';
 import { DashboardPage } from '@/pages/DashboardPage';
 import { GeneratorPage } from '@/pages/GeneratorPage';
-import { useApplications } from '@/hooks/useApplications';
+import { useApplications } from '@/shared/hooks/useApplications';
 import styles from './App.module.css';
 
 /**

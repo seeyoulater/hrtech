@@ -1,8 +1,8 @@
-import { Card } from './ui/Card';
-import { Button } from './ui/Button';
-import { Icon } from './ui/Icon';
-import { useCopy } from '@/hooks/useCopy';
-import { useAiConfigured } from '@/hooks/useAiConfigured';
+import { Card } from '@/shared/components/Card';
+import { Button } from '@/shared/components/Button';
+import { Icon } from '@/shared/components/Icon';
+import { useCopy } from '@/shared/hooks/useCopy';
+import { useAiConfigured } from '@/shared/hooks/useAiConfigured';
 import styles from './LetterPreview.module.css';
 
 type LetterPreviewProps = {

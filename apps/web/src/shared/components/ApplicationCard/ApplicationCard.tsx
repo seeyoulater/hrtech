@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
-import { Card } from './ui/Card';
-import { Button } from './ui/Button';
-import { Icon } from './ui/Icon';
-import { useCopy } from '@/hooks/useCopy';
-import type { Application } from '@/lib/applications';
+import { Card } from '@/shared/components/Card';
+import { Button } from '@/shared/components/Button';
+import { Icon } from '@/shared/components/Icon';
+import { useCopy } from '@/shared/hooks/useCopy';
+import type { Application } from '@/shared/lib/applications';
 import styles from './ApplicationCard.module.css';
 
 type ApplicationCardProps = {

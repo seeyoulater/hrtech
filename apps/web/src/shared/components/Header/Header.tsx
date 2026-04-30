@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
-import { Logo } from './ui/Logo';
-import { ProgressDots } from './ui/ProgressDots';
-import { IconButton } from './ui/IconButton';
-import { Icon } from './ui/Icon';
-import { GOAL } from '@/lib/applications';
+import { Logo } from '@/shared/components/Logo';
+import { ProgressDots } from '@/shared/components/ProgressDots';
+import { IconButton } from '@/shared/components/IconButton';
+import { Icon } from '@/shared/components/Icon';
+import { GOAL } from '@/shared/lib/applications';
 import styles from './Header.module.css';
 
 type HeaderProps = {

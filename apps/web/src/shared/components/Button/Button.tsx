@@ -1,6 +1,6 @@
 import { forwardRef } from 'react';
 import type { ButtonHTMLAttributes, ReactNode } from 'react';
-import { Spinner } from './Spinner';
+import { Spinner } from '@/shared/components/Spinner';
 import styles from './Button.module.css';
 
 type Variant = 'primary' | 'secondary' | 'ghost';

@@ -1,4 +1,4 @@
-import { Icon } from './Icon';
+import { Icon } from '@/shared/components/Icon';
 import styles from './Logo.module.css';
 
 export function Logo({ as: Tag = 'div' }: { as?: 'div' | 'a' | 'span' }) {

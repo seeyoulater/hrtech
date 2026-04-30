@@ -1,15 +1,15 @@
 import { useForm, useWatch } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { TextField } from './ui/TextField';
-import { TextArea } from './ui/TextArea';
-import { Button } from './ui/Button';
-import { Icon } from './ui/Icon';
+import { TextField } from '@/shared/components/TextField';
+import { TextArea } from '@/shared/components/TextArea';
+import { Button } from '@/shared/components/Button';
+import { Icon } from '@/shared/components/Icon';
 import {
   applicationSchema,
   DETAILS_MAX,
   EMPTY_FORM,
   type FormValues,
-} from '@/lib/applicationSchema';
+} from '@/shared/lib/applicationSchema';
 import styles from './ApplicationForm.module.css';
 
 type ApplicationFormProps = {

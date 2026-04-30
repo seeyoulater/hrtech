@@ -1,5 +1,5 @@
 import { useSyncExternalStore } from 'react';
-import { applicationsStore } from '@/lib/applications-store';
+import { applicationsStore } from '@/shared/lib/applications-store';
 
 export function useApplications() {
   const apps = useSyncExternalStore(

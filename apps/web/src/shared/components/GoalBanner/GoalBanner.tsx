@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
-import { Button } from './ui/Button';
-import { Icon } from './ui/Icon';
-import { ProgressDots } from './ui/ProgressDots';
-import { GOAL } from '@/lib/applications';
+import { Button } from '@/shared/components/Button';
+import { Icon } from '@/shared/components/Icon';
+import { ProgressDots } from '@/shared/components/ProgressDots';
+import { GOAL } from '@/shared/lib/applications';
 import styles from './GoalBanner.module.css';
 
 type GoalBannerProps = {

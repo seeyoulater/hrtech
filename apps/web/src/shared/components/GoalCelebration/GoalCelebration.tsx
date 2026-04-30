@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
-import { useApplications } from '@/hooks/useApplications';
-import { GOAL } from '@/lib/applications';
-import { useEmojiExplosion } from './effects/EmojiExplosion';
+import { useApplications } from '@/shared/hooks/useApplications';
+import { GOAL } from '@/shared/lib/applications';
+import { useEmojiExplosion } from '@/shared/components/EmojiExplosion';
 
 /**
  * Watches the application count and fires the emoji waterfall once
