@@ -92,7 +92,7 @@ export function ApplicationForm({
           loading={loading}
           disabled={!canSubmit}
           iconLeft={
-            !loading && hasGenerated ? <Icon name="refresh" size={18} /> : null
+            !loading && hasGenerated ? <Icon name="carbon:renew" size={18} /> : null
           }
         >
           {hasGenerated ? 'Try Again' : 'Generate Now'}

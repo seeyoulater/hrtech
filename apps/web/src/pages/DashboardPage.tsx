@@ -29,7 +29,7 @@ export function DashboardPage() {
       <div className={styles.titleRow}>
         <h1 className={styles.title}>Applications</h1>
         <Link to="/new" className={styles.cta}>
-          <Button size="md" iconLeft={<Icon name="plus" size={16} />} tabIndex={-1}>
+          <Button size="md" iconLeft={<Icon name="carbon:add" size={16} />} tabIndex={-1}>
             Create New
           </Button>
         </Link>

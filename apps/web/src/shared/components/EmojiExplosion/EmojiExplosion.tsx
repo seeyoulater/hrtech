@@ -16,10 +16,11 @@ const DEFAULT_MESSAGES = [
   "Locked in!",
   "Big energy.",
   "You earned this.",
+  "Bruh, you rock!",
   "YAAAAAY!",
   "WOHOOOO!!!",
   "Keep it up!",
-  "Slow down buddy!....",
+  "Chill buddy! AI will replace you anyway....",
 ];
 
 const MESSAGE_DURATION_MS = 2400;

@@ -20,7 +20,7 @@ export function GoalBanner({ count }: GoalBannerProps) {
         faster
       </p>
       <Link to="/new" className={styles.cta}>
-        <Button size="lg" iconLeft={<Icon name="plus" size={18} />} tabIndex={-1}>
+        <Button size="lg" iconLeft={<Icon name="carbon:add" size={18} />} tabIndex={-1}>
           Create New
         </Button>
       </Link>

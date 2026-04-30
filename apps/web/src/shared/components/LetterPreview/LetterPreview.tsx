@@ -50,7 +50,7 @@ export function LetterPreview({ letter, loading, error }: LetterPreviewProps) {
           variant="ghost"
           size="md"
           disabled={!hasContent || loading}
-          iconRight={<Icon name={copied ? 'check' : 'copy'} size={16} />}
+          iconRight={<Icon name={copied ? 'carbon:checkmark' : 'carbon:copy'} size={16} />}
           onClick={() => copy(letter)}
         >
           {copied ? 'Copied' : 'Copy to clipboard'}

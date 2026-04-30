@@ -24,7 +24,7 @@ export function ApplicationCard({ application, onDelete }: ApplicationCardProps)
           <p className={styles.text}>{application.letter}</p>
           <span className={styles.fade} aria-hidden="true" />
           <span className={styles.openCue} aria-hidden="true">
-            <Icon name="arrow-out" size={14} />
+            <Icon name="carbon:arrow-up-right" size={14} />
           </span>
         </div>
       </Link>
@@ -32,7 +32,7 @@ export function ApplicationCard({ application, onDelete }: ApplicationCardProps)
         <Button
           variant="ghost"
           size="md"
-          iconLeft={<Icon name="trash" size={16} />}
+          iconLeft={<Icon name="carbon:trash-can" size={16} />}
           onClick={() => onDelete(application.id)}
         >
           Delete
@@ -40,7 +40,7 @@ export function ApplicationCard({ application, onDelete }: ApplicationCardProps)
         <Button
           variant="ghost"
           size="md"
-          iconRight={<Icon name={copied ? 'check' : 'copy'} size={16} />}
+          iconRight={<Icon name={copied ? 'carbon:checkmark' : 'carbon:copy'} size={16} />}
           onClick={() => copy(application.letter)}
         >
           {copied ? 'Copied' : 'Copy to clipboard'}

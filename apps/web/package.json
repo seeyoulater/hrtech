@@ -14,6 +14,7 @@
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
     "@hrtech/shared": "workspace:*",
+    "@iconify/react": "^6.0.2",
     "classnames": "^2.5.1",
     "jotai": "^2.19.1",
     "nanoid": "^5.1.9",

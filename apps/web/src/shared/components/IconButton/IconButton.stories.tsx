@@ -7,7 +7,7 @@ const meta = {
   component: IconButton,
   args: {
     label: 'Home',
-    children: <Icon name="home" />,
+    children: <Icon name="carbon:home" />,
     variant: 'outline',
   },
   argTypes: {

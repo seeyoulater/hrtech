@@ -36,7 +36,7 @@ export const Large: Story = { args: { size: 'lg' } };
 export const FullWidth: Story = { args: { fullWidth: true, size: 'lg' } };
 
 export const WithLeftIcon: Story = {
-  args: { iconLeft: <Icon name="plus" size={16} />, children: 'Create New' },
+  args: { iconLeft: <Icon name="carbon:add" size={16} />, children: 'Create New' },
 };
 
 export const Loading: Story = { args: { loading: true, size: 'lg' } };

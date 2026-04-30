@@ -30,7 +30,7 @@ export function Header({ count }: HeaderProps) {
                 aria-label={`${GOAL} of ${GOAL} applications generated`}
                 role="img"
               >
-                <Icon name="check" size={14} />
+                <Icon name="carbon:checkmark" size={14} />
               </span>
             ) : (
               <ProgressDots total={GOAL} filled={filled} />
@@ -38,7 +38,7 @@ export function Header({ count }: HeaderProps) {
           </span>
           <Link to="/" aria-label="Dashboard" className={styles.homeLink}>
             <IconButton label="Dashboard" variant="outline" tabIndex={-1}>
-              <Icon name="home" />
+              <Icon name="carbon:home" />
             </IconButton>
           </Link>
         </div>
