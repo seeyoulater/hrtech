@@ -1,10 +1,6 @@
 import type { GenerateInput } from '@hrtech/shared';
-import { API_BASE } from './client';
-
-export type StreamHandlers = {
-  onToken: (chunk: string) => void;
-  signal?: AbortSignal;
-};
+import { API_BASE } from '@/constants/api';
+import type { StreamHandlers } from '@/shared/types/api';
 
 /**
  * POST /api/generate — streams a cover letter back as OpenAI-format

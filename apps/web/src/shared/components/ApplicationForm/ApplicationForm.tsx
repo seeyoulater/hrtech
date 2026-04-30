@@ -4,12 +4,9 @@ import { TextField } from '@/shared/components/TextField';
 import { TextArea } from '@/shared/components/TextArea';
 import { Button } from '@/shared/components/Button';
 import { Icon } from '@/shared/components/Icon';
-import {
-  applicationSchema,
-  DETAILS_MAX,
-  EMPTY_FORM,
-  type FormValues,
-} from '@/shared/lib/applicationSchema';
+import { applicationSchema } from '@/shared/scheme';
+import type { FormValues } from '@/shared/types/form';
+import { DETAILS_MAX, EMPTY_FORM } from '@/constants/form';
 import styles from './ApplicationForm.module.css';
 
 type ApplicationFormProps = {

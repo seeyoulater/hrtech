@@ -1,17 +1,10 @@
-export type Application = {
-  id: string;
-  jobTitle: string;
-  company: string;
-  strengths: string;
-  details: string;
-  letter: string;
-  createdAt: number;
-  updatedAt: number;
-};
+import type { Application } from '@/shared/types/application';
 
-export const GOAL = 5;
-export const STORAGE_KEY = 'hrtech.applications.v1';
-
+/**
+ * Type-guard for the persisted Application shape. Used when reading
+ * untrusted input (localStorage, cross-tab `storage` event payloads)
+ * to drop any partial or malformed records.
+ */
 export const isApplication = (v: unknown): v is Application => {
   if (!v || typeof v !== 'object') return false;
   const a = v as Record<string, unknown>;

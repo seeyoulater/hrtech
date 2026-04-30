@@ -1,20 +1,19 @@
 import { atom } from 'jotai';
 import { atomWithStorage } from 'jotai/utils';
 import { nanoid } from 'nanoid';
-import {
-  isApplication,
-  STORAGE_KEY,
-  type Application,
-} from './applications';
+import { STORAGE_KEY } from '@/constants/application';
+import type {
+  Application,
+  CreateApplicationInput,
+  UpdateApplicationInput,
+} from '@/shared/types/application';
+import { isApplication } from '@/shared/utils/validators';
 
 /**
  * Custom Jotai storage that wraps `localStorage` with:
  * - schema validation on read (corrupt or partial entries are dropped),
  * - cross-tab sync via the `storage` event,
  * - SSR safety (no-ops on the server).
- *
- * Uses the structural shape Jotai expects from `atomWithStorage`'s
- * third argument: `getItem | setItem | removeItem | subscribe`.
  */
 const applicationsStorage = {
   getItem(key: string, initialValue: Application[]): Application[] {
@@ -59,22 +58,12 @@ const applicationsStorage = {
   },
 };
 
-/**
- * The single source of truth: a Jotai atom backed by localStorage.
- * Read it with `useAtomValue(applicationsAtom)`. Direct writes are
- * possible via `useSetAtom(applicationsAtom)` but prefer the action
- * atoms below — they keep id/timestamp invariants in one place.
- */
+/** Source of truth: a Jotai atom backed by localStorage. */
 export const applicationsAtom = atomWithStorage<Application[]>(
   STORAGE_KEY,
   [],
   applicationsStorage,
 );
-
-export type CreateApplicationInput = Omit<
-  Application,
-  'id' | 'createdAt' | 'updatedAt'
->;
 
 /** Action atom: create. Returns the new record (with id + timestamps). */
 export const createApplicationAtom = atom(
@@ -91,11 +80,6 @@ export const createApplicationAtom = atom(
     return next;
   },
 );
-
-export type UpdateApplicationInput = {
-  id: string;
-  patch: Partial<Omit<Application, 'id' | 'createdAt'>>;
-};
 
 /** Action atom: update. */
 export const updateApplicationAtom = atom(

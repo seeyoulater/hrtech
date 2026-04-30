@@ -5,9 +5,11 @@ import {
   createApplicationAtom,
   removeApplicationAtom,
   updateApplicationAtom,
-  type CreateApplicationInput,
-} from '@/shared/lib/applications-store';
-import type { Application } from '@/shared/lib/applications';
+} from '@/shared/store';
+import type {
+  Application,
+  CreateApplicationInput,
+} from '@/shared/types/application';
 
 /**
  * Stable hook for the applications collection. Reads via `useAtomValue`

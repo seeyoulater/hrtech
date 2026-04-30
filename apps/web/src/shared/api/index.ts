@@ -16,5 +16,5 @@ export const api = {
   getHealth,
 } as const;
 
-export type { StreamHandlers } from './letters';
+export type { StreamHandlers } from '@/shared/types/api';
 export type { GenerateInput, HealthResponse } from '@hrtech/shared';

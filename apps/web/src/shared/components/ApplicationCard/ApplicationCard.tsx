@@ -3,7 +3,7 @@ import { Card } from '@/shared/components/Card';
 import { Button } from '@/shared/components/Button';
 import { Icon } from '@/shared/components/Icon';
 import { useCopy } from '@/shared/hooks/useCopy';
-import type { Application } from '@/shared/lib/applications';
+import type { Application } from '@/shared/types/application';
 import styles from './ApplicationCard.module.css';
 
 type ApplicationCardProps = {
