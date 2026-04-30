@@ -21,6 +21,10 @@
   cursor: not-allowed;
 }
 
+.btn[data-loading='true'] {
+  cursor: progress;
+}
+
 .btn:not(:disabled):active {
   transform: translateY(1px);
 }
@@ -49,7 +53,9 @@
   border-color: var(--color-accent-hover);
 }
 
-.variant_primary:disabled {
+/* Disabled gray applies only when truly disabled — loading keeps the
+   primary green so the spinner reads as "working", not "blocked". */
+.variant_primary:disabled:not([data-loading='true']) {
   background: var(--color-progress-empty);
   color: var(--color-text-subtle);
   border-color: var(--color-progress-empty);
@@ -65,7 +71,7 @@
   background: var(--color-bg-subtle);
 }
 
-.variant_secondary:disabled {
+.variant_secondary:disabled:not([data-loading='true']) {
   background: var(--color-bg-subtle);
   color: var(--color-text-subtle);
   border-color: var(--color-border);
@@ -81,7 +87,7 @@
   background: var(--color-bg-muted);
 }
 
-.variant_ghost:disabled {
+.variant_ghost:disabled:not([data-loading='true']) {
   color: var(--color-text-subtle);
 }
 
@@ -98,9 +104,4 @@
 .label {
   display: inline-flex;
   align-items: center;
-}
-
-/* Loading state — pulse on label */
-.loading .label {
-  opacity: 0.85;
 }

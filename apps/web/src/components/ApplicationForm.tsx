@@ -95,14 +95,10 @@ export function ApplicationForm({
           loading={loading}
           disabled={!canSubmit}
           iconLeft={
-            loading ? (
-              <span className={styles.spinner} aria-hidden="true" />
-            ) : hasGenerated ? (
-              <Icon name="refresh" size={18} />
-            ) : null
+            !loading && hasGenerated ? <Icon name="refresh" size={18} /> : null
           }
         >
-          {loading ? 'Generating…' : hasGenerated ? 'Try Again' : 'Generate Now'}
+          {hasGenerated ? 'Try Again' : 'Generate Now'}
         </Button>
       </form>
     </div>

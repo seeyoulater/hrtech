@@ -1,0 +1,16 @@
+.wrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: currentColor;
+}
+
+.svg {
+  animation: tickerSpin 0.85s steps(8) infinite;
+}
+
+@keyframes tickerSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}

@@ -1,5 +1,6 @@
 import { forwardRef } from 'react';
 import type { ButtonHTMLAttributes, ReactNode } from 'react';
+import { Spinner } from './Spinner';
 import styles from './Button.module.css';
 
 type Variant = 'primary' | 'secondary' | 'ghost';
@@ -50,9 +51,15 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
       data-loading={loading ? 'true' : undefined}
       {...rest}
     >
-      {iconLeft ? <span className={styles.icon}>{iconLeft}</span> : null}
-      <span className={styles.label}>{children}</span>
-      {iconRight ? <span className={styles.icon}>{iconRight}</span> : null}
+      {loading ? (
+        <Spinner size={size === 'lg' ? 24 : 18} />
+      ) : (
+        <>
+          {iconLeft ? <span className={styles.icon}>{iconLeft}</span> : null}
+          <span className={styles.label}>{children}</span>
+          {iconRight ? <span className={styles.icon}>{iconRight}</span> : null}
+        </>
+      )}
     </button>
   );
 });

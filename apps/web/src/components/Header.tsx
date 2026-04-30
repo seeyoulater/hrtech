@@ -12,6 +12,7 @@ type HeaderProps = {
 
 export function Header({ count }: HeaderProps) {
   const filled = Math.min(count, GOAL);
+  const achieved = count >= GOAL;
   return (
     <header className={styles.header}>
       <div className={styles.inner}>
@@ -23,7 +24,17 @@ export function Header({ count }: HeaderProps) {
             <span className={styles.progressLabel}>
               <strong>{filled}</strong>/{GOAL} applications generated
             </span>
-            <ProgressDots total={GOAL} filled={filled} />
+            {achieved ? (
+              <span
+                className={styles.achievedBadge}
+                aria-label={`${GOAL} of ${GOAL} applications generated`}
+                role="img"
+              >
+                <Icon name="check" size={14} />
+              </span>
+            ) : (
+              <ProgressDots total={GOAL} filled={filled} />
+            )}
           </span>
           <Link to="/" aria-label="Dashboard" className={styles.homeLink}>
             <IconButton label="Dashboard" variant="outline" tabIndex={-1}>
