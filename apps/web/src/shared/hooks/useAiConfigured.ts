@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react';
-import type { HealthResponse } from '@hrtech/shared';
-
-const API_BASE = (import.meta.env.VITE_API_URL as string | undefined) ?? '';
+import { api } from '@/shared/api';
 
 type Status = 'unknown' | 'live' | 'mock' | 'offline';
 
@@ -10,9 +8,7 @@ let inflight: Promise<Status> | null = null;
 
 const probe = async (): Promise<Status> => {
   try {
-    const res = await fetch(`${API_BASE}/api/health`);
-    if (!res.ok) return 'offline';
-    const data = (await res.json()) as HealthResponse;
+    const data = await api.getHealth();
     return data.aiConfigured ? 'live' : 'mock';
   } catch {
     return 'offline';

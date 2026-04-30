@@ -1,17 +1,16 @@
 import type { GenerateInput } from '@hrtech/shared';
+import { API_BASE } from './client';
 
 export type StreamHandlers = {
   onToken: (chunk: string) => void;
   signal?: AbortSignal;
 };
 
-const API_BASE = (import.meta.env.VITE_API_URL as string | undefined) ?? '';
-
 /**
- * Calls the backend's /api/generate endpoint, which proxies OpenAI and
- * keeps the API key server-side. The response is OpenAI-format SSE,
- * whether the backend is talking to OpenAI or returning a mock — the
- * parser doesn't care.
+ * POST /api/generate — streams a cover letter back as OpenAI-format
+ * SSE. Each token is delivered through `onToken`; the resolved value
+ * is the full text. Pass an `AbortSignal` to cancel mid-stream (the
+ * backend cancels its upstream request when the connection drops).
  */
 export async function generateLetter(
   input: GenerateInput,

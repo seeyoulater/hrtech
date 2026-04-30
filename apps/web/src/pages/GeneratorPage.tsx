@@ -4,7 +4,7 @@ import { ApplicationForm } from '@/shared/components/ApplicationForm';
 import { LetterPreview } from '@/shared/components/LetterPreview';
 import { GoalBanner } from '@/shared/components/GoalBanner';
 import { useApplications } from '@/shared/hooks/useApplications';
-import { generateLetter } from '@/shared/lib/ai';
+import { api } from '@/shared/api';
 import { EMPTY_FORM, type FormValues } from '@/shared/lib/applicationSchema';
 import styles from './GeneratorPage.module.css';
 
@@ -60,7 +60,7 @@ export function GeneratorPage({ initialId }: GeneratorPageProps) {
     setLetter('');
 
     try {
-      const finalText = await generateLetter(values, {
+      const finalText = await api.generateLetter(values, {
         signal: controller.signal,
         onToken: (chunk) => setLetter((prev) => prev + chunk),
       });
