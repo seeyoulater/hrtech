@@ -1,5 +1,6 @@
 import { forwardRef } from 'react';
 import type { ButtonHTMLAttributes, ReactNode } from 'react';
+import cn from 'classnames';
 import styles from './IconButton.module.css';
 
 type IconButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
@@ -13,16 +14,13 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
     { label, children, variant = 'outline', className, type = 'button', ...rest },
     ref,
   ) {
-    const cls = [styles.btn, styles[`variant_${variant}`], className]
-      .filter(Boolean)
-      .join(' ');
     return (
       <button
         ref={ref}
         type={type}
         aria-label={label}
         title={label}
-        className={cls}
+        className={cn(styles.btn, styles[`variant_${variant}`], className)}
         {...rest}
       >
         {children}

@@ -1,5 +1,6 @@
 import { forwardRef } from 'react';
 import type { ButtonHTMLAttributes, ReactNode } from 'react';
+import cn from 'classnames';
 import { Spinner } from '@/shared/components/Spinner';
 import styles from './Button.module.css';
 
@@ -31,16 +32,16 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
   },
   ref,
 ) {
-  const cls = [
+  const cls = cn(
     styles.btn,
     styles[`variant_${variant}`],
     styles[`size_${size}`],
-    fullWidth && styles.fullWidth,
-    loading && styles.loading,
+    {
+      [styles.fullWidth]: fullWidth,
+      [styles.loading]: loading,
+    },
     className,
-  ]
-    .filter(Boolean)
-    .join(' ');
+  );
 
   return (
     <button

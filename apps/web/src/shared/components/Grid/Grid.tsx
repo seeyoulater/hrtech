@@ -1,5 +1,6 @@
 import { createElement } from 'react';
 import type { CSSProperties, ReactNode } from 'react';
+import cn from 'classnames';
 import styles from './Grid.module.css';
 
 type Tag = 'div' | 'ul' | 'ol' | 'section' | 'nav';
@@ -39,13 +40,11 @@ export function Grid({
   style,
   children,
 }: GridProps) {
-  const classes = [
+  const classes = cn(
     styles.grid,
-    collapse ? COLLAPSE_CLASS[collapse] : null,
+    collapse && COLLAPSE_CLASS[collapse],
     className,
-  ]
-    .filter(Boolean)
-    .join(' ');
+  );
 
   const styleVars: CSSProperties = {
     ...style,

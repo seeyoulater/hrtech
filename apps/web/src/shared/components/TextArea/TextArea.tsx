@@ -1,5 +1,6 @@
 import { forwardRef, useId } from 'react';
 import type { TextareaHTMLAttributes } from 'react';
+import cn from 'classnames';
 import styles from './TextArea.module.css';
 
 type TextAreaProps = TextareaHTMLAttributes<HTMLTextAreaElement> & {
@@ -36,23 +37,21 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
     const isError = error ?? overCap;
 
     return (
-      <div className={[styles.field, className].filter(Boolean).join(' ')}>
+      <div className={cn(styles.field, className)}>
         <label htmlFor={inputId} className={styles.label}>
           {label}
         </label>
         <textarea
           ref={ref}
           id={inputId}
-          className={[styles.textarea, isError ? styles.error : ''].filter(Boolean).join(' ')}
+          className={cn(styles.textarea, { [styles.error]: isError })}
           aria-invalid={isError || undefined}
           value={value}
           {...rest}
         />
         {showCounter && countMax !== undefined ? (
           <div
-            className={[styles.counter, isError ? styles.counterError : '']
-              .filter(Boolean)
-              .join(' ')}
+            className={cn(styles.counter, { [styles.counterError]: isError })}
             aria-live="polite"
           >
             {length}/{countMax}
