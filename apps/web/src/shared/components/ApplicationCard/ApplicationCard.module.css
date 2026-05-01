@@ -1,8 +1,8 @@
 .card {
   display: flex;
   flex-direction: column;
-  padding: var(--space-4);
-  gap: var(--space-3);
+  padding: var(--space-6);
+  gap: var(--space-2);
   border: 1px solid transparent;
   /* Wrap shadow in a 0-spread baseline so the transition has somewhere
      to start from — otherwise box-shadow snap-flickers on first hover. */
@@ -36,8 +36,6 @@
 
 .body {
   position: relative;
-  height: 152px;
-  overflow: hidden;
 }
 
 .text {
@@ -46,6 +44,8 @@
   font-size: var(--text-base);
   line-height: var(--leading-relaxed);
   color: var(--color-text);
+  height: 152px;
+  overflow: hidden;
 }
 
 .fade {
@@ -94,8 +94,6 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-top: 1px solid var(--color-border);
-  padding-top: var(--space-3);
   margin-top: auto;
 }
 

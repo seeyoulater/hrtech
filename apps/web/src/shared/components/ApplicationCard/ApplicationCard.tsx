@@ -34,7 +34,8 @@ export const ApplicationCard = ({
       <div className={styles.actions}>
         <Button
           variant="ghost"
-          size="md"
+          size="sm"
+          flat
           iconLeft={<Icon name="carbon:trash-can" size={16} />}
           onClick={() => onDelete(application.id)}
         >
@@ -42,7 +43,8 @@ export const ApplicationCard = ({
         </Button>
         <Button
           variant="ghost"
-          size="md"
+          size="sm"
+          flat
           iconRight={<Icon name={copied ? 'carbon:checkmark' : 'carbon:copy'} size={16} />}
           onClick={() => copy(application.letter)}
         >

@@ -58,11 +58,19 @@ const applicationsStorage = {
   },
 };
 
-/** Source of truth: a Jotai atom backed by localStorage. */
+/**
+ * Source of truth: a Jotai atom backed by localStorage.
+ *
+ * `getOnInit: true` reads from storage during atom initialization so the
+ * first render already has the persisted data. Without it, deep links like
+ * /applications/:id mount with `applications === []`, fail their lookup,
+ * and bounce back to the dashboard before hydration completes.
+ */
 export const applicationsAtom = atomWithStorage<Application[]>(
   STORAGE_KEY,
   [],
   applicationsStorage,
+  { getOnInit: true },
 );
 
 /** Action atom: create. Returns the new record (with id + timestamps). */

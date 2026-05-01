@@ -74,6 +74,7 @@ export function GeneratorPage({ initialId }: GeneratorPageProps) {
       } else {
         const created = create({ ...values, letter: finalText });
         setSavedId(created.id);
+        navigate(`/applications/${created.id}`, { replace: true });
       }
     } catch (err) {
       if (err instanceof DOMException && err.name === 'AbortError') return;

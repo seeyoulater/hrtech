@@ -4,23 +4,39 @@
   gap: var(--space-5);
 }
 
+.titleHeader {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  gap: var(--space-3);
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--color-border);
+  min-width: 0;
+}
+
 .title {
   font-size: var(--text-3xl);
   margin: 0;
-  padding-bottom: var(--space-4);
-  border-bottom: 1px solid var(--color-border);
-  /* Cap the headline at 2 lines: long job titles or company names
-     truncate with an ellipsis instead of pushing the form down. The
-     full string is exposed on hover via the `title` attribute on the
-     <h1> for users who want to see it. */
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
-  -webkit-box-orient: vertical;
+  flex: 1 1 auto;
+  min-width: 0;
+  white-space: nowrap;
   overflow: hidden;
-  /* break stupidly long unbroken strings (URLs, no-space pastes)
-     instead of overflowing horizontally. */
-  overflow-wrap: anywhere;
+  text-overflow: ellipsis;
+}
+
+.subtitle {
+  font-size: var(--text-md);
+  font-family: var(--font-text);
+  font-weight: var(--weight-medium);
+  letter-spacing: 0;
+  color: var(--color-text-subtle);
+  margin: 0;
+  flex: 0 0 auto;
+  width: max-content;
+  max-width: 120px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .form {

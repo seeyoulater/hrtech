@@ -15,17 +15,28 @@
 .formCol {
   display: flex;
   flex-direction: column;
+  /* `min-width: 0` lets this grid child shrink below the intrinsic
+     min-content width of its descendants. Without it, a long
+     unbroken job title or company name (or the headline's <h1>
+     before its ellipsis kicks in) blows the column past the viewport
+     on mobile. */
+  min-width: 0;
 }
 
 .previewCol {
   display: flex;
   flex-direction: column;
   min-height: 100%;
+  min-width: 0;
 }
 
 @media (--laptop-down) {
   .layout {
-    grid-template-columns: 1fr;
+    /* `minmax(0, 1fr)` instead of plain `1fr`. Plain `1fr` resolves
+       to `minmax(auto, 1fr)` and refuses to shrink below intrinsic
+       min-content, which is what causes horizontal overflow on
+       mobile when a child has long unbroken text. */
+    grid-template-columns: minmax(0, 1fr);
     gap: var(--space-5);
   }
   .page {

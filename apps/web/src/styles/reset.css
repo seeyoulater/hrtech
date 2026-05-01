@@ -18,6 +18,12 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  /* Belt-and-suspenders against horizontal overflow on mobile. Any
+     descendant that escapes its layout (long unbroken strings, a
+     too-wide image, a misconfigured grid track) is clipped instead
+     of pushing the page wider than the viewport. */
+  max-width: 100vw;
+  overflow-x: hidden;
 }
 
 img,

@@ -5,7 +5,7 @@ import { Spinner } from '@/shared/components/Spinner';
 import styles from './Button.module.css';
 
 type Variant = 'primary' | 'secondary' | 'ghost' | 'destructive';
-type Size = 'md' | 'lg';
+type Size = 'sm' | 'md' | 'lg';
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   variant?: Variant;
@@ -14,6 +14,7 @@ type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   iconRight?: ReactNode;
   fullWidth?: boolean;
   loading?: boolean;
+  flat?: boolean;
 };
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
@@ -25,6 +26,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       iconRight,
       fullWidth,
       loading,
+      flat,
       disabled,
       children,
       className,
@@ -43,6 +45,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         {
           [styles.fullWidth]: fullWidth,
           [styles.loading]: loading,
+          [styles.flat]: flat,
         },
         className,
       )}
@@ -51,7 +54,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       {...rest}
     >
       {loading ? (
-        <Spinner size={size === 'lg' ? 24 : 18} />
+        <Spinner size={size === 'lg' ? 24 : size === 'sm' ? 14 : 18} />
       ) : (
         <>
           {iconLeft ? <span className={styles.icon}>{iconLeft}</span> : null}

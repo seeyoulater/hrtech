@@ -5,13 +5,18 @@ import styles from './TextField.module.css';
 
 type TextFieldProps = InputHTMLAttributes<HTMLInputElement> & {
   label: string;
+  /** Toggle the error border without a message. */
   error?: boolean;
+  /** When set, also renders the message below the input and forces error styling. */
+  errorMessage?: string;
 };
 
 export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
-  ({ label, id, className, error, ...rest }, ref) => {
+  ({ label, id, className, error, errorMessage, ...rest }, ref) => {
     const generatedId = useId();
     const inputId = id ?? generatedId;
+    const errorId = `${inputId}-error`;
+    const isError = error || !!errorMessage;
     return (
       <div className={cn(styles.field, className)}>
         <label htmlFor={inputId} className={styles.label}>
@@ -20,10 +25,16 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
         <input
           ref={ref}
           id={inputId}
-          className={cn(styles.input, { [styles.error]: error })}
-          aria-invalid={error || undefined}
+          className={cn(styles.input, { [styles.error]: isError })}
+          aria-invalid={isError || undefined}
+          aria-describedby={errorMessage ? errorId : undefined}
           {...rest}
         />
+        {errorMessage ? (
+          <p id={errorId} className={styles.errorMessage} role="alert">
+            {errorMessage}
+          </p>
+        ) : null}
       </div>
     );
   },

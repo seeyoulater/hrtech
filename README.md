@@ -254,6 +254,8 @@ browser ──fetch /api/generate──▶ Vite dev proxy ──▶ Fastify ─�
 setup put `VITE_OPENAI_API_KEY` in the bundle; anyone with devtools
 could lift it. The Fastify proxy is intentionally minimal (two routes
 
+`Yes, Next.js would’ve handled this way more easily, I know. But there weren’t any specific stack requirements, so I went with the one I wanted to practice a bit more. I’ve done way too much Next.js in the last few years`
+
 - a health check + auto-generated docs), so it's a small surface to
   host and reason about.
 
