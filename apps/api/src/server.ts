@@ -2,6 +2,11 @@ import Fastify from 'fastify';
 import cors from '@fastify/cors';
 import swagger from '@fastify/swagger';
 import swaggerUi from '@fastify/swagger-ui';
+import {
+  jsonSchemaTransform,
+  serializerCompiler,
+  validatorCompiler,
+} from 'fastify-type-provider-zod';
 import { healthRoute } from './routes/health.js';
 import { generateRoute } from './routes/generate.js';
 
@@ -23,6 +28,12 @@ async function buildServer() {
     },
   });
 
+  // Wire Zod into Fastify: routes can pass Zod schemas as `body` /
+  // `response` and they get used both for runtime validation and for
+  // generating the OpenAPI spec via `jsonSchemaTransform`.
+  app.setValidatorCompiler(validatorCompiler);
+  app.setSerializerCompiler(serializerCompiler);
+
   await app.register(cors, {
     origin:
       CORS_ORIGIN === '*'
@@ -32,7 +43,8 @@ async function buildServer() {
   });
 
   // Swagger MUST be registered before the routes so it can collect
-  // their schemas as they're added.
+  // their schemas as they're added. `transform` converts Zod schemas
+  // attached to routes into JSON Schema for the OpenAPI doc.
   await app.register(swagger, {
     openapi: {
       info: {
@@ -51,6 +63,7 @@ async function buildServer() {
         { name: 'generate', description: 'AI cover-letter generation' },
       ],
     },
+    transform: jsonSchemaTransform,
   });
 
   await app.register(swaggerUi, {

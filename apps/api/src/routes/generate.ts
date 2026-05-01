@@ -1,6 +1,7 @@
 import type { FastifyPluginAsync } from 'fastify';
 import { Readable } from 'node:stream';
-import type { GenerateInput } from '@hrtech/shared';
+import { applicationSchema } from '@hrtech/shared';
+import type { z } from 'zod';
 import { openOpenAiStream } from '../utils/openai.js';
 import { mockOpenAiSseStream } from '../utils/mock.js';
 
@@ -11,45 +12,23 @@ type GenerateRouteOptions = {
   model: string;
 };
 
-const generateBodySchema = {
-  type: 'object',
-  required: ['jobTitle', 'company'],
-  additionalProperties: false,
-  properties: {
-    jobTitle: { type: 'string', maxLength: 200, examples: ['Product manager'] },
-    company: { type: 'string', maxLength: 200, examples: ['Apple'] },
-    strengths: {
-      type: 'string',
-      maxLength: 1000,
-      default: '',
-      examples: ['Design systems and reliable shipping'],
-    },
-    details: {
-      type: 'string',
-      maxLength: 1200,
-      default: '',
-      examples: ['5 years on developer tooling'],
-    },
-  },
-} as const;
-
-const errorResponseSchema = {
-  type: 'object',
-  required: ['error'],
-  properties: { error: { type: 'string' } },
-} as const;
-
 /**
  * POST /api/generate — streams a cover letter back as OpenAI-format
  * SSE. Falls back to the deterministic mock when no API key is
  * configured. Cancels the upstream OpenAI request when the client
  * disconnects mid-stream.
+ *
+ * Body validation reuses the exact same Zod schema the web form
+ * uses, imported from `@hrtech/shared`. Single source of truth: a
+ * cap change in `packages/shared/src/applicationSchema.ts` updates
+ * the form, the form's error messages, the API validation, and the
+ * OpenAPI doc, all at once.
  */
 export const generateRoute: FastifyPluginAsync<GenerateRouteOptions> = async (
   app,
   opts,
 ) => {
-  app.post<{ Body: GenerateInput }>(
+  app.post(
     '/api/generate',
     {
       schema: {
@@ -60,21 +39,16 @@ export const generateRoute: FastifyPluginAsync<GenerateRouteOptions> = async (
           'contains a `choices[0].delta.content` token; the stream ends ' +
           'with `data: [DONE]`. The same shape is produced by the mock ' +
           'fallback when the backend has no API key.',
-        body: generateBodySchema,
-        response: {
-          // 200 is the streamed response; declared loosely since the
-          // body is text/event-stream, not JSON.
-          200: {
-            description: 'OpenAI-format SSE stream of letter tokens.',
-            type: 'string',
-          },
-          400: errorResponseSchema,
-          502: errorResponseSchema,
-        },
+        body: applicationSchema,
+        // Response intentionally untyped here: the success path is a
+        // text/event-stream (not JSON, so a Zod response schema would
+        // mislead Fastify's serialiser), and the error paths return
+        // an `{ error: string }` JSON body that's documented in the
+        // route description above.
       },
     },
     async (request, reply) => {
-      const input = request.body;
+      const input = request.body as z.infer<typeof applicationSchema>;
       const controller = new AbortController();
       // Cancel the upstream request if the client disconnects mid-stream.
       // (`reply.raw` is the response; its 'close' fires on the client's

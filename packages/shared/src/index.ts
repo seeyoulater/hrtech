@@ -1,5 +1,5 @@
 /**
- * Shared types between the web app and the API.
+ * Shared types and runtime values between the web app and the API.
  * Importing TS sources directly works because both ends use bundler
  * module resolution (Vite for web, tsx for api dev, tsc for api build).
  */
@@ -20,3 +20,12 @@ export type HealthResponse = {
   aiConfigured: boolean;
   model: string;
 };
+
+export {
+  applicationSchema,
+  TITLE_MAX,
+  COMPANY_MAX,
+  STRENGTHS_MAX,
+  DETAILS_MAX,
+  type FormValues,
+} from './applicationSchema';
