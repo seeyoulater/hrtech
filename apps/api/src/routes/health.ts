@@ -1,20 +1,16 @@
 import type { FastifyPluginAsync } from 'fastify';
-import type { HealthResponse } from '@hrtech/shared';
+import { z } from 'zod';
 
 type HealthRouteOptions = {
   aiConfigured: boolean;
   model: string;
 };
 
-const responseSchema = {
-  type: 'object',
-  required: ['ok', 'aiConfigured', 'model'],
-  properties: {
-    ok: { type: 'boolean', enum: [true] },
-    aiConfigured: { type: 'boolean' },
-    model: { type: 'string' },
-  },
-} as const;
+const healthResponseSchema = z.object({
+  ok: z.literal(true),
+  aiConfigured: z.boolean(),
+  model: z.string(),
+});
 
 /**
  * GET /api/health — backend status. Reports whether OpenAI credentials
@@ -25,7 +21,7 @@ export const healthRoute: FastifyPluginAsync<HealthRouteOptions> = async (
   app,
   opts,
 ) => {
-  app.get<{ Reply: HealthResponse }>(
+  app.get(
     '/api/health',
     {
       schema: {
@@ -34,12 +30,12 @@ export const healthRoute: FastifyPluginAsync<HealthRouteOptions> = async (
         description:
           'Returns whether the upstream AI provider is configured and which model is in use.',
         response: {
-          200: responseSchema,
+          200: healthResponseSchema,
         },
       },
     },
     async () => ({
-      ok: true,
+      ok: true as const,
       aiConfigured: opts.aiConfigured,
       model: opts.model,
     }),
