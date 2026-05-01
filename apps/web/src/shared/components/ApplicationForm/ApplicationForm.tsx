@@ -50,7 +50,9 @@ export const ApplicationForm = ({
 
   return (
     <div className={styles.wrap}>
-      <h1 className={styles.title}>{headline}</h1>
+      <h1 className={styles.title} title={headline}>
+        {headline}
+      </h1>
       <form className={styles.form} onSubmit={submit} noValidate>
         <div className={styles.row}>
           <TextField
