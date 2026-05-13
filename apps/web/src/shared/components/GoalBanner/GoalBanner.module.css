@@ -9,14 +9,23 @@
   gap: var(--space-4);
 }
 
+/* ProgressDots renders a <span> as the 4th flex child — bump its top
+   margin so the gap between the CTA and the dots is 32px (16 from gap
+   + 16 from margin). */
+.banner > span {
+  margin-top: var(--space-4);
+}
+
 .title {
-  font-size: var(--text-3xl);
+  font-size: 36px;
   margin: 0;
 }
 
 .copy {
   color: var(--color-text-muted);
-  max-width: 360px;
+  font-size: 18px;
+  line-height: 28px;
+  max-width: 520px;
   margin: 0;
 }
 
@@ -26,9 +35,11 @@
 }
 
 .count {
-  color: var(--color-text-muted);
-  font-size: var(--text-sm);
-  margin: 0;
+  color: #667085;
+  font-size: 18px;
+  line-height: 28px;
+  /* Cancel half the flex gap so dots → count reads as 8px (16 - 8). */
+  margin: calc(-1 * var(--space-2)) 0 0;
   font-variant-numeric: tabular-nums;
 }
 

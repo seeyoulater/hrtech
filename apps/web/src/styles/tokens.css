@@ -1,31 +1,31 @@
 :root {
   /* === Color === */
   --color-bg: #ffffff;
-  --color-bg-muted: #f3f3f5;
+  --color-bg-muted: #f2f4f7;
   --color-bg-subtle: #f7f7f8;
-  --color-bg-banner: #e7f3ec;
+  --color-bg-banner: #edfcf2;
   --color-bg-banner-strong: #d8ecdf;
 
   --color-text: #1a1a1a;
   --color-text-muted: #6b6b73;
   --color-text-subtle: #9a9aa4;
+  --color-text-placeholder: #667085;
   --color-text-on-accent: #ffffff;
 
-  --color-border: #e6e6ea;
+  --color-border: #eaecf0;
   --color-border-strong: #d4d4da;
 
-  --color-accent: #1f7a4a;
+  --color-accent: #087443;
   --color-accent-hover: #186138;
   --color-accent-active: #134d2c;
-  --color-accent-soft: #d8ecdf;
+  --color-accent-soft: #d3f8df;
 
   --color-danger: #e85d5d;
   --color-danger-hover: #cf4a4a;
   --color-danger-soft: #fde2e0;
   --color-focus: #2962ff;
 
-  --color-progress-empty: #d6d6dc;
-  --color-progress-filled: #1f1f23;
+  --color-progress-filled: #101828;
 
   /* === Radius === */
   --radius-xs: 4px;

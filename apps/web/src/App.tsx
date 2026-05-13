@@ -1,4 +1,11 @@
-import { BrowserRouter, Route, Routes, useParams } from 'react-router-dom';
+import { useEffect } from 'react';
+import {
+  BrowserRouter,
+  Route,
+  Routes,
+  useLocation,
+  useParams,
+} from 'react-router-dom';
 import { Header } from '@/shared/components/Header';
 import { GoalCelebration } from '@/shared/components/GoalCelebration';
 import { EmojiExplosionProvider } from '@/shared/components/EmojiExplosion';
@@ -19,10 +26,19 @@ function GeneratorRoute() {
   return <GeneratorPage key={id ?? 'new'} initialId={id} />;
 }
 
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+}
+
 function AppShell() {
   const { applications } = useApplications();
   return (
     <div className={styles.shell}>
+      <ScrollToTop />
       <Header count={applications.length} />
       <main className={styles.main}>
         <div className={styles.container}>

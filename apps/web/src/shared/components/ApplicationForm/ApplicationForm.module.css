@@ -15,28 +15,20 @@
 }
 
 .title {
-  font-size: var(--text-3xl);
+  font-size: 36px;
+  color: #667085;
   margin: 0;
   flex: 1 1 auto;
   min-width: 0;
-  white-space: nowrap;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
   overflow: hidden;
-  text-overflow: ellipsis;
+  overflow-wrap: anywhere;
 }
 
-.subtitle {
-  font-size: var(--text-md);
-  font-family: var(--font-text);
-  font-weight: var(--weight-medium);
-  letter-spacing: 0;
-  color: var(--color-text-subtle);
-  margin: 0;
-  flex: 0 0 auto;
-  width: max-content;
-  max-width: 120px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+.titleFilled {
+  color: #101828;
 }
 
 .form {

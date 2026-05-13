@@ -72,12 +72,13 @@ export const LetterPreview = ({
         <div className={styles.footer}>
           <Button
             variant="ghost"
-            size="md"
+            size="sm"
+            flat
             disabled={!hasContent || loading}
             iconRight={
               <Icon
                 name={copied ? "carbon:checkmark" : "carbon:copy"}
-                size={16}
+                size={20}
               />
             }
             onClick={() => copy(letter)}

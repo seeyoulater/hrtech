@@ -36,7 +36,7 @@ export const ApplicationCard = ({
           variant="ghost"
           size="sm"
           flat
-          iconLeft={<Icon name="carbon:trash-can" size={16} />}
+          iconLeft={<Icon name="carbon:trash-can" size={20} />}
           onClick={() => onDelete(application.id)}
         >
           Delete
@@ -45,7 +45,7 @@ export const ApplicationCard = ({
           variant="ghost"
           size="sm"
           flat
-          iconRight={<Icon name={copied ? 'carbon:checkmark' : 'carbon:copy'} size={16} />}
+          iconRight={<Icon name={copied ? 'carbon:checkmark' : 'carbon:copy'} size={20} />}
           onClick={() => copy(application.letter)}
         >
           {copied ? 'Copied' : 'Copy to clipboard'}

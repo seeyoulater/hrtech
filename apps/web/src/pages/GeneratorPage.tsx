@@ -102,7 +102,7 @@ export function GeneratorPage({ initialId }: GeneratorPageProps) {
           <LetterPreview letter={letter} loading={loading} error={error} />
         </section>
       </div>
-      <GoalBanner count={applications.length} />
+      {initialId ? <GoalBanner count={applications.length} /> : null}
     </div>
   );
 }

@@ -24,9 +24,9 @@
 .body {
   margin: 0;
   white-space: pre-wrap;
-  font-size: var(--text-base);
-  line-height: var(--leading-relaxed);
-  color: var(--color-text);
+  font-size: 18px;
+  line-height: 28px;
+  color: var(--color-text-placeholder);
 }
 
 .caret {
@@ -47,8 +47,9 @@
 
 .placeholderText {
   margin: 0;
-  font-size: var(--text-base);
-  color: var(--color-text-muted);
+  font-size: 18px;
+  line-height: 28px;
+  color: var(--color-text-placeholder);
 }
 
 .statusHint {

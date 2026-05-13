@@ -1,5 +1,6 @@
 import { useForm, useWatch } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import cn from 'classnames';
 import { TextField } from '@/shared/components/TextField';
 import { TextArea } from '@/shared/components/TextArea';
 import { Button } from '@/shared/components/Button';
@@ -16,20 +17,12 @@ type ApplicationFormProps = {
   hasGenerated: boolean;
 };
 
-type HeadlineParts = {
-  /** Primary line (h1). Always present. */
-  primary: string;
-  /** Secondary line (company). Null when there's no second piece. */
-  secondary: string | null;
-};
-
-const headlineParts = (jobTitle: string, company: string): HeadlineParts => {
+const buildHeadline = (jobTitle: string, company: string): string => {
   const role = jobTitle.trim();
   const co = company.trim();
-  if (!role && !co) return { primary: 'New application', secondary: null };
-  if (role && co) return { primary: role, secondary: co };
-  // Whichever single field is filled becomes the primary line.
-  return { primary: role || co, secondary: null };
+  if (!role && !co) return 'New application';
+  if (role && co) return `${role}, ${co}`;
+  return role || co;
 };
 
 export const ApplicationForm = ({
@@ -50,10 +43,8 @@ export const ApplicationForm = ({
   });
 
   const live = useWatch({ control });
-  const { primary, secondary } = headlineParts(
-    live.jobTitle ?? '',
-    live.company ?? '',
-  );
+  const headline = buildHeadline(live.jobTitle ?? '', live.company ?? '');
+  const hasJobTitle = (live.jobTitle ?? '').trim().length > 0;
   const detailsLength = live.details?.length ?? 0;
 
   const submit = handleSubmit((vals) => onSubmit(vals));
@@ -62,14 +53,12 @@ export const ApplicationForm = ({
   return (
     <div className={styles.wrap}>
       <header className={styles.titleHeader}>
-        <h1 className={styles.title} title={primary}>
-          {primary}
+        <h1
+          className={cn(styles.title, hasJobTitle && styles.titleFilled)}
+          title={headline}
+        >
+          {headline}
         </h1>
-        {secondary ? (
-          <p className={styles.subtitle} title={secondary}>
-            {secondary}
-          </p>
-        ) : null}
       </header>
       <form className={styles.form} onSubmit={submit} noValidate>
         <div className={styles.row}>
@@ -97,7 +86,7 @@ export const ApplicationForm = ({
         />
         <TextArea
           label="Additional details"
-          placeholder="What should we mention? Projects, results, what you're looking for…"
+          placeholder="Describe why you are a great fit or paste your bio"
           showCounter
           countMax={DETAILS_MAX}
           count={detailsLength}

@@ -6,7 +6,7 @@
   border-radius: var(--radius-md);
   font-family: var(--font-text);
   font-weight: var(--weight-semibold);
-  font-size: var(--text-base);
+  font-size: 16px;
   line-height: 1;
   white-space: nowrap;
   transition:
@@ -33,18 +33,16 @@
 .size_sm {
   height: 24px;
   padding: 0 var(--space-2);
-  font-size: var(--text-sm);
 }
 
 .size_md {
-  height: 36px;
-  padding: 0 var(--space-4);
+  height: 44px;
+  padding: 10px 18px;
 }
 
 .size_lg {
-  height: 52px;
+  height: 60px;
   padding: 0 var(--space-5);
-  font-size: var(--text-md);
 }
 
 /* Variants */
@@ -62,15 +60,15 @@
 /* Disabled gray applies only when truly disabled — loading keeps the
    primary green so the spinner reads as "working", not "blocked". */
 .variant_primary:disabled:not([data-loading='true']) {
-  background: var(--color-progress-empty);
-  color: var(--color-text-subtle);
-  border-color: var(--color-progress-empty);
+  background: #d0d5dd;
+  color: #98a2b3;
+  border-color: #d0d5dd;
 }
 
 .variant_secondary {
   background: var(--color-bg);
-  color: var(--color-text);
-  border: 1px solid var(--color-border-strong);
+  color: #344054;
+  border: 1px solid #d0d5dd;
 }
 
 .variant_secondary:not(:disabled):hover {
@@ -85,7 +83,7 @@
 
 .variant_ghost {
   background: transparent;
-  color: var(--color-text);
+  color: #475467;
   border: 1px solid transparent;
 }
 
@@ -109,9 +107,9 @@
 }
 
 .variant_destructive:disabled:not([data-loading='true']) {
-  background: var(--color-progress-empty);
-  color: var(--color-text-subtle);
-  border-color: var(--color-progress-empty);
+  background: #d0d5dd;
+  color: #98a2b3;
+  border-color: #d0d5dd;
 }
 
 .fullWidth {
