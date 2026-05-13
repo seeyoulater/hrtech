@@ -17,8 +17,15 @@ export const Header = ({ count }: HeaderProps) => {
   const achieved = count >= GOAL;
   const [scrolled, setScrolled] = useState(false);
 
+  // Hysteresis — collapsing the header shrinks the document by ~48px, so
+  // a single threshold causes oscillation when the page barely scrolls past
+  // it (clamp → expand → re-trigger). Use distinct enter/exit cutoffs that
+  // sit on either side of that gap.
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 0);
+    const onScroll = () => {
+      const y = window.scrollY;
+      setScrolled((prev) => (prev ? y > 20 : y > 100));
+    };
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
