@@ -24,7 +24,7 @@
 .body {
   margin: 0;
   white-space: pre-wrap;
-  font-size: 18px;
+  font-size: var(--text-xl);
   line-height: 28px;
   color: var(--color-text-placeholder);
 }
@@ -47,7 +47,7 @@
 
 .placeholderText {
   margin: 0;
-  font-size: 18px;
+  font-size: var(--text-xl);
   line-height: 28px;
   color: var(--color-text-placeholder);
 }

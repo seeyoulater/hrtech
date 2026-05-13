@@ -5,17 +5,17 @@
 }
 
 .label {
-  font-size: 14px;
+  font-size: var(--text-base);
   line-height: 20px;
-  color: #344054;
+  color: var(--color-text-strong);
   font-weight: var(--weight-medium);
 }
 
 .textarea {
   min-height: 140px;
   padding: var(--space-3);
-  border-radius: 6px;
-  border: 1px solid #d0d5dd;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border-strong);
   background: var(--color-bg);
   color: var(--color-text);
   font-family: var(--font-text);
@@ -31,13 +31,9 @@
   color: var(--color-text-placeholder);
 }
 
-.textarea:hover {
-  border-color: var(--color-border-strong);
-}
-
 .textarea:focus {
   outline: none;
-  border-color: #73e2a3;
+  border-color: var(--color-accent-medium);
   box-shadow: 0 0 0 3px var(--color-accent-soft);
 }
 

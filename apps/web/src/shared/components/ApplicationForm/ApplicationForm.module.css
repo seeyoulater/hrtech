@@ -15,8 +15,8 @@
 }
 
 .title {
-  font-size: 36px;
-  color: #667085;
+  font-size: var(--text-4xl);
+  color: var(--color-text-placeholder);
   margin: 0;
   flex: 1 1 auto;
   min-width: 0;
@@ -28,7 +28,7 @@
 }
 
 .titleFilled {
-  color: #101828;
+  color: var(--color-text);
 }
 
 .form {

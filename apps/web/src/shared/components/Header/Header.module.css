@@ -14,7 +14,7 @@
 .inner {
   max-width: var(--content-max);
   margin: 0 auto;
-  padding: 32px var(--content-padding-x);
+  padding: var(--space-7) var(--content-padding-x);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -23,8 +23,8 @@
 }
 
 .header.scrolled .inner {
-  padding-top: 8px;
-  padding-bottom: 8px;
+  padding-top: var(--space-2);
+  padding-bottom: var(--space-2);
 }
 
 .logoLink {
@@ -42,7 +42,7 @@
   align-items: center;
   gap: var(--space-3);
   color: var(--color-text-placeholder);
-  font-size: 18px;
+  font-size: var(--text-xl);
 }
 
 .progress strong {
@@ -55,8 +55,8 @@
 }
 
 .homeButton {
-  border-color: #d0d5dd;
-  color: #344054;
+  border-color: var(--color-border-strong);
+  color: var(--color-text-strong);
 }
 
 .achievedBadge {
@@ -66,8 +66,8 @@
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  background: #d1fadf;
-  color: #12b76a;
+  background: var(--color-success-soft);
+  color: var(--color-success);
   flex-shrink: 0;
 }
 

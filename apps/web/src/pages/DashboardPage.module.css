@@ -15,8 +15,8 @@
 }
 
 .title {
-  font-size: 48px;
-  color: #101828;
+  font-size: var(--text-5xl);
+  color: var(--color-text);
   margin: 0;
 }
 

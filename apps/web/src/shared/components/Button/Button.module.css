@@ -6,7 +6,7 @@
   border-radius: var(--radius-md);
   font-family: var(--font-text);
   font-weight: var(--weight-semibold);
-  font-size: 16px;
+  font-size: var(--text-lg);
   line-height: 1;
   white-space: nowrap;
   transition:
@@ -60,15 +60,15 @@
 /* Disabled gray applies only when truly disabled — loading keeps the
    primary green so the spinner reads as "working", not "blocked". */
 .variant_primary:disabled:not([data-loading='true']) {
-  background: #d0d5dd;
-  color: #98a2b3;
-  border-color: #d0d5dd;
+  background: var(--color-border-strong);
+  color: var(--color-text-subtle);
+  border-color: var(--color-border-strong);
 }
 
 .variant_secondary {
   background: var(--color-bg);
-  color: #344054;
-  border: 1px solid #d0d5dd;
+  color: var(--color-text-strong);
+  border: 1px solid var(--color-border-strong);
 }
 
 .variant_secondary:not(:disabled):hover {
@@ -83,7 +83,7 @@
 
 .variant_ghost {
   background: transparent;
-  color: #475467;
+  color: var(--color-text-muted);
   border: 1px solid transparent;
 }
 
@@ -107,9 +107,9 @@
 }
 
 .variant_destructive:disabled:not([data-loading='true']) {
-  background: #d0d5dd;
-  color: #98a2b3;
-  border-color: #d0d5dd;
+  background: var(--color-border-strong);
+  color: var(--color-text-subtle);
+  border-color: var(--color-border-strong);
 }
 
 .fullWidth {

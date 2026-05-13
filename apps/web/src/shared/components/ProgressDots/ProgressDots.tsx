@@ -20,7 +20,7 @@ export const ProgressDots = ({
     {Array.from({ length: total }).map((_, i) => (
       <span
         key={i}
-        className={cn(styles.dot, i < filled ? styles.filled : styles.empty)}
+        className={cn(styles.dot, i >= filled && styles.empty)}
       />
     ))}
   </span>
