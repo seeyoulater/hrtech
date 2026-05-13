@@ -16,7 +16,7 @@ import styles from './Icon.module.css';
  */
 type IconName = `carbon:${string}` | `streamline:${string}`;
 
-type Size = 12 | 14 | 16 | 18 | 24;
+type Size = 12 | 14 | 16 | 18 | 20 | 24;
 
 type Props = Omit<IconProps, 'icon'> & {
   name: IconName;
